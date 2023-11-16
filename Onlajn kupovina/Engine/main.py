@@ -2,9 +2,7 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
-def main():
-    return render_template('pocetna.html')
+
 
 if __name__ == "__main__":
-    app.run(port=8005)
+    app.run(debug=True)
