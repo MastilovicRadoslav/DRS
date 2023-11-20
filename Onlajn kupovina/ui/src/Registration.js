@@ -1,41 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const RegistrationForm = () => {
-    const stilkontejnera = {
+const Registracija = () => {
+
+    const [ime, podesiIme] = useState('');
+    const [prezime, podesiPrezime] = useState('');
+    const [adresa, podesiAdresu] = useState('');
+    const [grad, podesiGrad] = useState('');
+    const [drzava, podesiDrzavu] = useState('');
+    const [brTel, podesiBrTel] = useState('');
+    const [email, podesiEmail] = useState('');
+    const [lozinka, podesiLozinku] = useState('');
+
+    const stilKontejnera = {
         textAlign: 'center',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        width: '300px',
+        height: '410px'
     };
 
-    const stilforme = {
+    const stilForme = {
         display: 'inline-block',
         textAlign: 'left',
     };
 
-    const Stillabel = {
+    const stilZaLabelu = {
         fontFamily: 'Times New Roman',
         fontWeight: 'bold',
         marginTop: 0,
     };
 
-    const stilzaunos = {
+    const stilZaUnos = {
         fontFamily: 'Times New Roman',
         color: 'blue',
     };
 
-    const stilzadugme = {
+    const stilZaDugme = {
         fontFamily: 'Times New Roman',
         fontWeight: 'bold',
     };
 
-    const stilnaslova = {
+    const stilNaslova = {
         fontFamily: 'Times New Roman',
         fontWeight: 'bold',
         marginTop: 0,
         textAlign: 'center',
     };
 
-    const stilcelestranice = {
+    const stilCeleStranice = {
         textAlign: 'center',
+        backgroundImage: `url('/.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: '100vh',
@@ -44,52 +60,113 @@ const RegistrationForm = () => {
         justifyContent: 'center',
     };
 
+    const stilZaNavBar = {
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        zIndex: 1000,
+    }
+
+    const registracijaKorisnika = () => {
+        if (ime.length === 0) {
+            alert("Ime mora biti popunjeno !!")
+        }
+        else if (prezime.length === 0) {
+            alert("Prezime mora biti popunjeno !!")
+        }
+        else if (adresa.length === 0) {
+            alert("Adresa mora biti popunjena !!")
+        }
+        else if (grad.length === 0) {
+            alert("Grad mora biti popunjen !!")
+        }
+        else if (drzava.length === 0) {
+            alert("Država mora biti popunjena !!")
+        }
+        else if (brTel.length === 0) {
+            alert("Broj telefona mora biti popunjen !!")
+        }
+        else if (email.length === 0) {
+            alert("Email mora biti popunjen !!")
+        }
+        else if (lozinka.length === 0) {
+            alert("Lozinka mora biti popunjena !!")
+        }
+        else {
+            axios.post('http://127.0.0.1:5000/Registracija', {
+                ime: ime,
+                prezime: prezime,
+                adresa: adresa,
+                grad: grad,
+                drzava: drzava,
+                brTel: brTel,
+                email: email,
+                lozinka: lozinka
+            })
+            alert("Registracija je uspešna !!")
+        }
+    }
+
     return (
-        <div style={stilcelestranice}>
-            <div className="kontejner" style={stilkontejnera}>
-                <div className="forma" style={stilforme}>
-                    <h1 style={stilnaslova}>Registracija</h1>
-                    <table>
+        <div style={stilCeleStranice}>
+            <div style={stilZaNavBar}>
+                <ul className="nav nav-pills nav-fill">
+                    <li className="nav-item">
+                        <Link to="/" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Početna</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/Prijava" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Prijava</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/Registracija" className="nav-link active" style={{ color: 'yellow', fontWeight: "bold" }}>Registracija</Link>
+                    </li>
+                </ul>
+            </div>
+            <div className="kontejner" style={stilKontejnera}>
+                <div className="forma" style={stilForme}>
+                    <h1 style={stilNaslova}>Registracija</h1>
+                    <table style={{ margin: 'auto', borderSpacing: '0 5px', borderCollapse: 'separate' }}>
                         <tr>
-                            <td style={Stillabel}>Ime:</td>
-                            <td><input style={stilzaunos} type="text" id="ime" name="ime" maxLength="25" /></td>
+                            <td style={stilZaLabelu}>Ime:</td>
+                            <td><input style={stilZaUnos} value={ime} onChange={(e) => podesiIme(e.target.value)} type="text" id="ime" className="ime" maxLength="25" /></td>
                         </tr>
                         <tr>
-                            <td style={Stillabel}>Prezime:</td>
-                            <td><input style={stilzaunos} type="text" id="prezime" name="prezime" maxLength="25" /></td>
+                            <td style={stilZaLabelu}>Prezime:</td>
+                            <td><input style={stilZaUnos} value={prezime} onChange={(e) => podesiPrezime(e.target.value)} type="text" id="prezime" className="prezime" maxLength="25" /></td>
                         </tr>
                         <tr>
-                            <td style={Stillabel}>Adresa:</td>
-                            <td><input style={stilzaunos} type="text" id="adresa" name="adresa" maxLength="25" /></td>
+                            <td style={stilZaLabelu}>Adresa:</td>
+                            <td><input style={stilZaUnos} value={adresa} onChange={(e) => podesiAdresu(e.target.value)} type="text" id="adresa" className="adresa" maxLength="25" /></td>
                         </tr>
                         <tr>
-                            <td style={Stillabel}>Grad:</td>
-                            <td><input style={stilzaunos} type="text" id="grad" name="grad" maxLength="25" /></td>
+                            <td style={stilZaLabelu}>Grad:</td>
+                            <td><input style={stilZaUnos} value={grad} onChange={(e) => podesiGrad(e.target.value)} type="text" id="grad" className="grad" maxLength="25" /></td>
                         </tr>
                         <tr>
-                            <td style={Stillabel}>Država:</td>
-                            <td><input style={stilzaunos} type="text" id="drzava" name="drzava" maxLength="25" /></td>
+                            <td style={stilZaLabelu}>Država:</td>
+                            <td><input style={stilZaUnos} value={drzava} onChange={(e) => podesiDrzavu(e.target.value)} type="text" id="drzava" className="drzava" maxLength="25" /></td>
                         </tr>
                         <tr>
-                            <td style={Stillabel}>Broj telefona:</td>
-                            <td><input style={stilzaunos} type="text" id="brtelefona" name="brtelefona" maxLength="25" /></td>
+                            <td style={stilZaLabelu}>Broj telefona:</td>
+                            <td><input style={stilZaUnos} value={brTel} onChange={(e) => podesiBrTel(e.target.value)} type="text" id="brtelefona" className="brtelefona" maxLength="25" /></td>
                         </tr>
                         <tr>
-                            <td style={Stillabel}>Email:</td>
-                            <td><input style={stilzaunos} type="email" id="email" name="email" maxLength="30" /></td>
+                            <td style={stilZaLabelu}>Email:</td>
+                            <td><input style={stilZaUnos} value={email} onChange={(e) => podesiEmail(e.target.value)} type="email" id="email" className="email" maxLength="30" /></td>
                         </tr>
                         <tr>
-                            <td style={Stillabel}>Lozinka:</td>
-                            <td><input style={stilzaunos} type="password" id="lozinka" name="lozinka" maxLength="18" /></td>
+                            <td style={stilZaLabelu}>Lozinka:</td>
+                            <td><input style={stilZaUnos} value={lozinka} onChange={(e) => podesiLozinku(e.target.value)} type="password" id="lozinka" className="lozinka" maxLength="18" /></td>
                         </tr>
                         <tr>
                             <td colSpan="2" align="center">
                                 <input
                                     className="btn btn-outline-primary"
                                     id="registracijaDugme"
-                                    style={stilzadugme}
+                                    style={stilZaDugme}
                                     type="submit"
                                     value="Registracija"
+                                    onClick={registracijaKorisnika}
                                 />
                             </td>
                         </tr>
@@ -100,4 +177,4 @@ const RegistrationForm = () => {
     );
 }
 
-export default RegistrationForm;
+export default Registracija;
