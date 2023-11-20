@@ -10,7 +10,9 @@ const Prijava = () => {
 
     const stilKontejnera = {
         textAlign: 'center',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        width: '280px',
+        height: '180px'
     };
 
     const stilForme = {
@@ -43,7 +45,7 @@ const Prijava = () => {
 
     const stilCeleStranice = {
         textAlign: 'center',
-        backgroundImage: `url('/.jpg')`,
+        backgroundImage: `url('Pozadine/pozadinaPiR.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: '100vh',

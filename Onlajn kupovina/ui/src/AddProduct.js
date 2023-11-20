@@ -14,8 +14,8 @@ const DodajProizvod = () => {
         textAlign: 'center',
         backgroundColor: 'white',
         marginLeft: '950px',
-        width: '360px',
-        height: '200px'
+        width: '370px',
+        height: '260px'
     };
 
     const stilForme = {
@@ -48,7 +48,7 @@ const DodajProizvod = () => {
 
     const stilCeleStranice = {
         textAlign: 'center',
-        backgroundImage: `url('/.jpg')`,
+        backgroundImage: `url('Pozadine/proizvodi.jpg')`,
         backgroundSize: 'cover',
         height: '100vh',
         display: 'flex',
