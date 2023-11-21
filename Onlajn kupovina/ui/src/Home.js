@@ -15,6 +15,7 @@ const Pocetna = () => {
     const stilCeleStranice = {
         textAlign: 'center',
         backgroundSize: 'cover',
+        backgroundImage: `url('Pozadine/pozadinaPocetna.jpg')`,
         backgroundPosition: 'center',
         height: '100vh',
         display: 'flex',
