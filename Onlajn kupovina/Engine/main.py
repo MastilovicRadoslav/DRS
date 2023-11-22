@@ -82,5 +82,35 @@ def dodavanjeProizvoda():
     
     return jsonify(response_data), 200
 
+# Izmjena profila
+@app.route('/Profil', methods=['POST'])
+def izmenaProfila():
+    ime = request.json['ime']
+    prezime = request.json['prezime']
+    adresa = request.json['adresa']
+    grad = request.json['grad']
+    drzava = request.json['drzava']
+    brojTelefona = request.json['brTel']
+    email = request.json['email']
+    lozinka = request.json['lozinka']
+
+    app.logger.info(f"Email: {email}, Password: {lozinka}")
+
+    app.logger.info(f"Ime: {ime}, Prezime: {prezime}, Adresa: {adresa}, Grad: {grad}, Drzava: {drzava}, Broj Telefona: {brojTelefona}, Email: {email}, Lozinka: {lozinka}")
+
+    response_data = {
+        "message": "Data received successfully",
+        "email": email,
+        "lozinka": lozinka,
+        "ime": ime,
+        "prezime": prezime,
+        "adresa": adresa,
+        "grad": grad,
+        "drzava": drzava,
+        "brojTelefona": brojTelefona
+    }
+
+    return jsonify(response_data), 200
+
 if __name__ == "__main__":
     app.run(debug=True)
