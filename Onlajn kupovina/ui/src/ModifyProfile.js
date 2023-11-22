@@ -50,7 +50,7 @@ const IzmenaProfila = () => {
 
     const stilCeleStranice = {
         textAlign: 'center',
-        backgroundImage: `url('Pozadine/')`,
+        backgroundImage: `url('Pozadine/profil.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: '100vh',
