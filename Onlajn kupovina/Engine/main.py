@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from notificationBy_Email import posalji_email
 
 app = Flask(__name__)
 
@@ -41,6 +42,11 @@ def registracija():
     
     app.logger.info(f"\nIme: {ime}\nPrezime: {prezime}\nAdresa: {adresa}\nGrad: {grad}\nDrzava: {drzava}\nBroj Telefona: {brojTelefona}\nEmail: {email}\nLozinka: {lozinka}")
     
+    subject = "Registrovan je novi korisnik"
+    body = f"Podaci o korisniku:\nIme: {ime}\nPrezime: {prezime}\nAdresa: {adresa}\nGrad: {grad}\nDrzava: {drzava}\nBroj Telefona: {brojTelefona}\nEmail: {email}\nLozinka: {lozinka}"
+    to_email = "drsprojekat2023@gmail.com"
+
+    posalji_email(subject, body, to_email)
     
     response_data = {
         "message": "Podaci uspješno primljeni",
