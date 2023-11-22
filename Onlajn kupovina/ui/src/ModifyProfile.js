@@ -16,8 +16,8 @@ const IzmenaProfila = () => {
     const stilKontejnera = {
         textAlign: 'center',
         backgroundColor: 'white',
-        width: '280px',
-        height: '180px'
+        width: '320px',
+        height: '400px'
     };
 
     const stilForme = {
@@ -58,13 +58,6 @@ const IzmenaProfila = () => {
         alignItems: 'center',
         justifyContent: 'center',
     };
-
-    const stilZaNavBar = {
-        position: 'fixed',
-        top: 0,
-        width: '100%',
-        zIndex: 1000,
-    }
 
     const sacuvajIzmene = () => {
         if (ime.length === 0) {
@@ -108,22 +101,9 @@ const IzmenaProfila = () => {
 
     return (
         <div style={stilCeleStranice}>
-            <div style={stilZaNavBar}>
-                <ul className="nav nav-pills nav-fill">
-                    <li className="nav-item">
-                        <Link to="/" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Početna</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/Prijava" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Prijava</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/Registracija" className="nav-link active" style={{ color: 'yellow', fontWeight: "bold" }}>Registracija</Link>
-                    </li>
-                </ul>
-            </div>
             <div className="kontejner" style={stilKontejnera}>
                 <div className="forma" style={stilForme}>
-                    <h1 style={stilNaslova}>Registracija</h1>
+                    <h1 style={stilNaslova}>Pregled profila</h1>
                     <table style={{ margin: 'auto', borderSpacing: '0 5px', borderCollapse: 'separate' }}>
                         <tr>
                             <td style={stilZaLabelu}>Ime:</td>
@@ -158,7 +138,7 @@ const IzmenaProfila = () => {
                             <td><input style={stilZaUnos} value={lozinka} type="password" id="lozinka" className="lozinka" maxLength="18" /></td>
                         </tr>
                         <tr>
-                            <td colSpan="2" align="center">
+                            <td colSpan="2" align="right" style={{ padding: '0 40px 0 0' }}>
                                 <input
                                     className="btn btn-outline-primary"
                                     id="registracijaDugme"
