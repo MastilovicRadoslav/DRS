@@ -63,7 +63,7 @@ const UzivoPracenjeKupovina = () => {
 
     const stilCeleStranice = {
         textAlign: 'center',
-        backgroundImage: `url('/.jpg')`,
+        backgroundImage: `url('Pozadine/uzivoPracenjeKupovina.jpg')`,
         backgroundSize: 'cover',
         height: '100vh',
         display: 'flex',
