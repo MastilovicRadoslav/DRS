@@ -5,6 +5,7 @@ import DodajProizvod from './AddProduct';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Pocetna from './Home';
 import IzmenaProfila from './ModifyProfile';
+import UzivoPracenjeKupovina from './LivePurchaseTracking'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/Registracija" element={<Registracija />} ></Route>
           <Route path="/Proizvod" element={<DodajProizvod />} ></Route>
           <Route path="/Profil" element={<IzmenaProfila />} ></Route>
+          <Route path="/Uzivo" element={<UzivoPracenjeKupovina />} ></Route>
         </Routes>
       </BrowserRouter>
     </div>
