@@ -105,7 +105,7 @@ def izmenaProfila():
     app.logger.info(f"Ime: {ime}, Prezime: {prezime}, Adresa: {adresa}, Grad: {grad}, Drzava: {drzava}, Broj Telefona: {brojTelefona}, Email: {email}, Lozinka: {lozinka}")
 
     response_data = {
-        "message": "Data received successfully",
+        "message": "Podaci uspješno primljeni",
         "email": email,
         "lozinka": lozinka,
         "ime": ime,
@@ -117,6 +117,12 @@ def izmenaProfila():
     }
 
     return jsonify(response_data), 200
+
+@app.route('/Uzivo', methods=['GET'])
+def get_data():
+    data = [
+    ]
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug=True)
