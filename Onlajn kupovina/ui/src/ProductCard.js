@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import PotvrdaKupovine from './PurchaseConfirmation';
 
 const PrikazProizvoda = ({ proizvod }) => {
+
+    const [showModal, setShowModal] = useState(false);
+    const handleOpenModal = () => setShowModal(true);
+    const handleCloseModal = () => setShowModal(false);
+
     const stilKartice = {
         width: '18rem',
     };
@@ -20,8 +26,9 @@ const PrikazProizvoda = ({ proizvod }) => {
                 <li className="list-group-item">Cena: {proizvod.cena} {proizvod.valuta}</li>
                 <li className="list-group-item">Količina: {proizvod.kolicina}</li>
                 <li className="list-group-item">
-                    <button className="btn btn-outline-primary">Naruči</button>
+                    <button className="btn btn-outline-primary" onClick={handleOpenModal}>Naruči</button>
                 </li>
+                <PotvrdaKupovine showModal={showModal} handleCloseModal={handleCloseModal} nazivProizvoda={proizvod.naziv} cenaProizvoda={proizvod.cena} valutaProizvoda={proizvod.valuta} />
             </ul>
         </div>
     );
