@@ -9,6 +9,7 @@ const DodajProizvod = () => {
     const [kolicina, podesiKolicinu] = useState('');
     const [valute, postaviValute] = useState([]);
     const [valuta, postaviOdabranuValutu] = useState('');
+    const [slika, podesiSliku] = useState('');
 
     const stilKontejnera = {
         textAlign: 'center',
@@ -80,7 +81,8 @@ const DodajProizvod = () => {
                 naziv: naziv,
                 cena: cena,
                 valuta: valuta,
-                kolicina: kolicina
+                kolicina: kolicina,
+                slika: slika
             })
             alert("Uspešno ste dodali proizvod !!")
         }
@@ -148,6 +150,8 @@ const DodajProizvod = () => {
                                         <input
                                             type="file"
                                             accept="image/*"
+                                            value={slika}
+                                            onChange={(e) => podesiSliku(e.target.value)}
                                         />
                                     </td>
                                 </td>
