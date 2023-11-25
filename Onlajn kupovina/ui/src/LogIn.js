@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Prijava = () => {
 
     const [email, podesiEmail] = useState('');
     const [lozinka, podesiLozinku] = useState('');
+    const redirekcija = useNavigate();
 
     const stilKontejnera = {
         textAlign: 'center',
@@ -62,10 +63,10 @@ const Prijava = () => {
     }
 
     const prijavaKorisnika = () => {
-        if (email.length === 0) {
+        if (email.length === 0 || !/^[a-zA-Z0-9@.]*$/.test(email)) {
             alert("Email mora biti popunjen !!")
         }
-        else if (lozinka.length === 0) {
+        else if (lozinka.length === 0 || lozinka.length < 6) {
             alert("Lozinka mora biti popunjena !!")
         }
         else {
@@ -73,7 +74,15 @@ const Prijava = () => {
                 email: email,
                 lozinka: lozinka
             })
-            alert("Prijava je uspešna !!")
+
+            if (email === 'drsprojekat2023@gmail.com') {
+                alert("Prijavio se admin !!")
+                redirekcija('/Proizvod');
+            }
+            else {
+                alert("Prijava je uspešna !!")
+                redirekcija('/');
+            }
         }
     }
 
