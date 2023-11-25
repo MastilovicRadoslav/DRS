@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Registracija = () => {
 
@@ -13,6 +13,7 @@ const Registracija = () => {
     const [brTel, podesiBrTel] = useState('');
     const [email, podesiEmail] = useState('');
     const [lozinka, podesiLozinku] = useState('');
+    const redirekcija = useNavigate();
 
     const stilKontejnera = {
         textAlign: 'center',
@@ -68,28 +69,28 @@ const Registracija = () => {
     }
 
     const registracijaKorisnika = () => {
-        if (ime.length === 0) {
+        if (ime.length === 0 || /\d/.test(ime) || !/^[a-zA-Z\s]*$/.test(ime)) {
             alert("Ime mora biti popunjeno !!")
         }
-        else if (prezime.length === 0) {
+        else if (prezime.length === 0 || /\d/.test(prezime) || !/^[a-zA-Z\s]*$/.test(prezime)) {
             alert("Prezime mora biti popunjeno !!")
         }
-        else if (adresa.length === 0) {
+        else if (adresa.length === 0 || !/^[a-zA-Z0-9\s]+$/.test(adresa)) {
             alert("Adresa mora biti popunjena !!")
         }
-        else if (grad.length === 0) {
+        else if (grad.length === 0|| /\d/.test(grad) || !/^[a-zA-Z\s]*$/.test(grad)) {
             alert("Grad mora biti popunjen !!")
         }
-        else if (drzava.length === 0) {
+        else if (drzava.length === 0 || /\d/.test(drzava) || !/^[a-zA-Z\s]*$/.test(drzava)) {
             alert("Država mora biti popunjena !!")
         }
-        else if (brTel.length === 0) {
+        else if (brTel.length === 0 || /^[a-zA-Z]*$/.test(brTel)) {
             alert("Broj telefona mora biti popunjen !!")
         }
-        else if (email.length === 0) {
+        else if (email.length === 0 || !/^[a-zA-Z0-9@.]*$/.test(email)) {
             alert("Email mora biti popunjen !!")
         }
-        else if (lozinka.length === 0) {
+        else if (lozinka.length === 0 || lozinka.length < 6) {
             alert("Lozinka mora biti popunjena !!")
         }
         else {
@@ -104,6 +105,7 @@ const Registracija = () => {
                 lozinka: lozinka
             })
             alert("Registracija je uspešna !!")
+            redirekcija('/Prijava');
         }
     }
 
