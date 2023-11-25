@@ -3,6 +3,7 @@ from flask_cors import CORS
 from notificationBy_Email import posalji_email
 from Product import Proizvod
 from User import Korisnik
+from convert_image_path import zamenaPutanje
 
 app = Flask(__name__)
 
@@ -14,35 +15,48 @@ proizvodi = [
         cena= 222000,
         valuta= 'RSD',
         kolicina= 5,
-        slika= '/laptop.jpg'
+        slika= 'Prozivodi/laptop.jpg'
     ),
     Proizvod(
         naziv= 'Grafička kartica - NVIDIA GeForce RTX 3080', 
         cena= 85657, 
         valuta= 'RSD',
         kolicina= 2, 
-        slika= '/graficka.jpg'
+        slika= 'Prozivodi/graficka.jpg'
     ),
     Proizvod(
         naziv= 'Monitor - Dell UltraSharp U2719D',
         cena= 42828,
         valuta= 'RSD',
         kolicina= 8,
-        slika= '/monitor.jpg'
+        slika= 'Prozivodi/monitor.jpg'
     ),
     Proizvod(
         naziv= 'Bežični miš - Logitech MX Master 3',
         cena= 10700,
         valuta= 'RSD',
         kolicina= 10,
-        slika= '/mis.jpg'
+        slika= 'Prozivodi/mis.jpg'
     ),
     Proizvod(
         naziv= 'Sapiens: Kratka istorija čovečanstva', 
         cena= 2676, 
         valuta= 'RSD',
         kolicina= 30, 
-        slika= '/knjiga.jpg'
+        slika= 'Prozivodi/knjiga.jpg'
+    )
+]
+
+Korisnici = [
+    Korisnik(
+        ime= 'admin',
+        prezime= 'drs',
+        adresa= 'Trg Dositeja Obradovića 6',
+        grad= 'Novi Sad',
+        drzava= 'Srbija',
+        brojTelefona= '021450810',
+        email= 'drsProjekat2023@gmail.com',
+        lozinka= 'drsadmin'
     )
 ]
 
@@ -112,9 +126,13 @@ def dodavanjeProizvoda():
     cena = request.json['cena']
     valuta = request.json.get('valuta')
     kolicina = request.json['kolicina']
+    slika = request.json['slika']
 
+    slika = zamenaPutanje(slika)
+
+    proizvodi.append(Proizvod(naziv, cena, valuta, kolicina, slika))
     
-    app.logger.info(f"\nNaziv proivoda: {naziv}\ncena: {cena}\nvaluta: {valuta}\nkolicina {kolicina}")
+    app.logger.info(f"\nNaziv proivoda: {naziv}\ncena: {cena}\nvaluta: {valuta}\nkolicina {kolicina}\nslika {slika}")
 
     
     response_data = {
@@ -158,12 +176,20 @@ def izmenaProfila():
 
     return jsonify(response_data), 200
 
+# Prikaz podataka na stranici Uzivo pracenje kupovina
 @app.route('/Uzivo', methods=['GET'])
 def get_data():
     data = [
+        {
+            'nazivProizvoda': proizvod.naziv,
+            'cena': proizvod.cena,
+            'valuta': proizvod.valuta,
+        }
+        for proizvod in proizvodi
     ]
     return jsonify(data)
 
+# Prikaz podataka na pocetnoj stranici
 @app.route('/', methods=['GET'])
 def posaljiProizvod():
     data = [
@@ -179,5 +205,6 @@ def posaljiProizvod():
 
     return jsonify(data)
 
+# Main
 if __name__ == "__main__":
     app.run(debug=True)
