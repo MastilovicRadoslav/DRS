@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const DodajProizvod = () => {
 
@@ -10,6 +11,7 @@ const DodajProizvod = () => {
     const [valute, postaviValute] = useState([]);
     const [valuta, postaviOdabranuValutu] = useState('');
     const [slika, podesiSliku] = useState('');
+    const redirekcija = useNavigate();
 
     const stilKontejnera = {
         textAlign: 'center',
@@ -85,6 +87,7 @@ const DodajProizvod = () => {
                 slika: slika
             })
             alert("Uspešno ste dodali proizvod !!")
+            redirekcija('/');
         }
     }
 
