@@ -14,12 +14,13 @@ const PrikazProizvoda = ({ proizvod }) => {
 
     const stilSlike = {
         width: '100%',
+        height: '80%'
     };
 
     return (
         <div className="card" style={stilKartice}>
-            <img src={proizvod.slikaUrl} className="card-img-top" alt={proizvod.naziv} style={stilSlike} />
-            <div className="card-body">
+            <img src={proizvod.slika} className="card-img-top" alt={proizvod.naziv} style={stilSlike} />
+            <div className="card-body" style={{ marginTop: '50px' }}>
                 <h5 className="card-title">{proizvod.naziv}</h5>
             </div>
             <ul className="list-group list-group-flush">
