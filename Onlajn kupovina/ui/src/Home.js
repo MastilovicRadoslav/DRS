@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import PrikazProizvoda from './ProductCard'
+import axios from 'axios';
 
 const Pocetna = () => {
+
+    const [data, setData] = useState([]);
 
     const stilKontejneraZaKartice = {
         display: 'flex',
@@ -35,6 +38,19 @@ const Pocetna = () => {
         zIndex: 1000,
     }
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/');
+                setData(response.data);
+            } catch (error) {
+                console.error('Greška:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <div className='pocetnaStranica' style={stilCeleStranice}>
             <div style={stilZaNavBar}>
@@ -51,6 +67,9 @@ const Pocetna = () => {
                 </ul>
             </div>
             <div className="kontejner" style={stilKontejneraZaKartice}>
+                {data.map((proizvod, index) => (
+                    <PrikazProizvoda key={index} proizvod={proizvod} />
+                ))}
             </div>
         </div>
     );
