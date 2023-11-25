@@ -1,10 +1,50 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from notificationBy_Email import posalji_email
+from Product import Proizvod
+from User import Korisnik
 
 app = Flask(__name__)
 
 CORS(app, supports_credentials=True)
+
+proizvodi = [
+    Proizvod(
+        naziv= 'Laptop - ASUS ROG Strix G17',
+        cena= 222000,
+        valuta= 'RSD',
+        kolicina= 5,
+        slika= '/laptop.jpg'
+    ),
+    Proizvod(
+        naziv= 'Grafička kartica - NVIDIA GeForce RTX 3080', 
+        cena= 85657, 
+        valuta= 'RSD',
+        kolicina= 2, 
+        slika= '/graficka.jpg'
+    ),
+    Proizvod(
+        naziv= 'Monitor - Dell UltraSharp U2719D',
+        cena= 42828,
+        valuta= 'RSD',
+        kolicina= 8,
+        slika= '/monitor.jpg'
+    ),
+    Proizvod(
+        naziv= 'Bežični miš - Logitech MX Master 3',
+        cena= 10700,
+        valuta= 'RSD',
+        kolicina= 10,
+        slika= '/mis.jpg'
+    ),
+    Proizvod(
+        naziv= 'Sapiens: Kratka istorija čovečanstva', 
+        cena= 2676, 
+        valuta= 'RSD',
+        kolicina= 30, 
+        slika= '/knjiga.jpg'
+    )
+]
 
 # Obrada prijavljivanja
 @app.route('/Prijava', methods=['POST'])
@@ -122,6 +162,21 @@ def izmenaProfila():
 def get_data():
     data = [
     ]
+    return jsonify(data)
+
+@app.route('/', methods=['GET'])
+def posaljiProizvod():
+    data = [
+        {
+            'naziv': proizvod.naziv,
+            'cena': proizvod.cena,
+            'valuta': proizvod.valuta,
+            'kolicina': proizvod.kolicina,
+            'slika': proizvod.slika,
+        }
+        for proizvod in proizvodi
+    ]
+
     return jsonify(data)
 
 if __name__ == "__main__":
