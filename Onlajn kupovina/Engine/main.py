@@ -51,7 +51,7 @@ Korisnici = [
     Korisnik(
         ime= 'admin',
         prezime= 'drs',
-        adresa= 'Trg Dositeja Obradovića 6',
+        adresa= 'Trg Dositeja Obradovica 6',
         grad= 'Novi Sad',
         drzava= 'Srbija',
         brojTelefona= '021450810',
@@ -60,13 +60,20 @@ Korisnici = [
     )
 ]
 
+prijavljen = None
+
 # Obrada prijavljivanja
 @app.route('/Prijava', methods=['POST'])
 def prijava():
     
     email = request.json['email']
     lozinka = request.json['lozinka']
+    global prijavljen
 
+    for korisnik in Korisnici:
+        if korisnik.email == email:
+            prijavljen = korisnik
+            break
     
     app.logger.info(f"\nEmail: {email}\nLozinka: {lozinka}")
 
@@ -121,7 +128,6 @@ def registracija():
 @app.route('/Proizvod', methods=['POST'])
 def dodavanjeProizvoda():
 
-    
     naziv = request.json['naziv']
     cena = request.json['cena']
     valuta = request.json.get('valuta')
@@ -157,6 +163,32 @@ def izmenaProfila():
     brojTelefona = request.json['brTel']
     email = request.json['email']
     lozinka = request.json['lozinka']
+    global prijavljen
+
+    for korisnik in Korisnici:
+        if korisnik.ime != ime:
+            prijavljen.ime = ime
+
+        if korisnik.prezime != prezime:
+            prijavljen.prezime = prezime
+
+        if korisnik.adresa != adresa:
+            prijavljen.adresa = adresa
+
+        if korisnik.grad != grad:
+            prijavljen.grad = grad
+
+        if korisnik.drzava != drzava:
+            prijavljen.drzava = drzava
+
+        if korisnik.brojTelefona != brojTelefona:
+            prijavljen.brojTelefona = brojTelefona
+
+        if korisnik.email != email:
+            prijavljen.email = email
+
+        if korisnik.lozinka != lozinka:
+            prijavljen.lozinka = lozinka
 
     app.logger.info(f"Email: {email}, Password: {lozinka}")
 
@@ -202,6 +234,27 @@ def posaljiProizvod():
         }
         for proizvod in proizvodi
     ]
+
+    return jsonify(data)
+
+# Prikaz podataka na stranici za izmenu profila
+@app.route('/Profil', methods=['GET'])
+def izmeniProfil():
+    global prijavljen
+
+    data = {}
+
+    if prijavljen is not None:
+        data = {
+            "ime": prijavljen.ime,
+            "prezime": prijavljen.prezime,
+            "adresa": prijavljen.adresa,
+            "grad": prijavljen.grad,
+            "drzava": prijavljen.drzava,
+            "brTel": prijavljen.brojTelefona,
+            "email": prijavljen.email,
+            "lozinka": prijavljen.lozinka
+        }
 
     return jsonify(data)
 
