@@ -2,5 +2,5 @@ import os
 
 def zamenaPutanje(putanja):
     nazivFajla = os.path.basename(putanja)
-    noviFormat = f"Prozivodi/{nazivFajla}"
+    noviFormat = f"Proizvodi/{nazivFajla}"
     return noviFormat

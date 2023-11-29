@@ -15,35 +15,35 @@ proizvodi = [
         cena= 222000,
         valuta= 'RSD',
         kolicina= 5,
-        slika= 'Prozivodi/laptop.jpg'
+        slika= 'Proizvodi/laptop.jpg'
     ),
     Proizvod(
         naziv= 'Grafička kartica - NVIDIA GeForce RTX 3080', 
         cena= 85657, 
         valuta= 'RSD',
         kolicina= 2, 
-        slika= 'Prozivodi/graficka.jpg'
+        slika= 'Proizvodi/graficka.jpg'
     ),
     Proizvod(
         naziv= 'Monitor - Dell UltraSharp U2719D',
         cena= 42828,
         valuta= 'RSD',
         kolicina= 8,
-        slika= 'Prozivodi/monitor.jpg'
+        slika= 'Proizvodi/monitor.jpg'
     ),
     Proizvod(
         naziv= 'Bežični miš - Logitech MX Master 3',
         cena= 10700,
         valuta= 'RSD',
         kolicina= 10,
-        slika= 'Prozivodi/mis.jpg'
+        slika= 'Proizvodi/mis.jpg'
     ),
     Proizvod(
         naziv= 'Sapiens: Kratka istorija čovečanstva', 
         cena= 2676, 
         valuta= 'RSD',
         kolicina= 30, 
-        slika= 'Prozivodi/knjiga.jpg'
+        slika= 'Proizvodi/knjiga.jpg'
     )
 ]
 
