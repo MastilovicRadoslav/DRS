@@ -6,7 +6,8 @@ import axios from 'axios';
 
 const Pocetna = () => {
 
-    const [data, setData] = useState([]);
+    const [podaci, podesiPodatke] = useState([]);
+    const [uloga, podesiUlogu] = useState([]);
 
     const stilKontejneraZaKartice = {
         display: 'flex',
@@ -38,11 +39,30 @@ const Pocetna = () => {
         zIndex: 1000,
     }
 
+    const stilZaProfil = {
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        marginRight: '30px',
+        marginTop: '40px',
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/');
-                setData(response.data);
+                const odgovor = await axios.get('http://localhost:5000/');
+                podesiPodatke(odgovor.data);
+                const email = odgovor.data.email;
+
+                if (email === '') {
+                    podesiUlogu('/');
+                }
+                else if (email === 'drsprojekat2023@gmail.com') {
+                    podesiUlogu('/Proizvod');
+                }
+                else {
+                    podesiUlogu('/Profil');
+                }
             } catch (error) {
                 console.error('Greška:', error);
             }
@@ -66,8 +86,13 @@ const Pocetna = () => {
                     </li>
                 </ul>
             </div>
+            <div style={stilZaProfil}>
+                <Link to={uloga}>
+                    <img src="/profil.jpg" alt="Profile" style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
+                </Link>
+            </div>
             <div className="kontejner" style={stilKontejneraZaKartice}>
-                {data.map((proizvod, index) => (
+                {podaci.map((proizvod, index) => (
                     <PrikazProizvoda key={index} proizvod={proizvod} />
                 ))}
             </div>
