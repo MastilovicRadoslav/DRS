@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const IzmenaProfila = () => {
 
@@ -12,13 +13,13 @@ const IzmenaProfila = () => {
     const [brTel, podesiBrTel] = useState('');
     const [email, podesiEmail] = useState('');
     const [lozinka, podesiLozinku] = useState('');
-    const [data, setData] = useState([]);
+    const [podaci, podesiPodatke] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/Profil');
-                setData(response.data);
+                const odgovor = await axios.get('http://localhost:5000/Profil');
+                podesiPodatke(odgovor.data);
             } catch (error) {
                 console.error('Greška: ', error);
             }
@@ -31,7 +32,8 @@ const IzmenaProfila = () => {
         textAlign: 'center',
         backgroundColor: 'white',
         width: '320px',
-        height: '400px'
+        height: '400px',
+        borderRadius: '10px'
     };
 
     const stilForme = {
@@ -72,6 +74,13 @@ const IzmenaProfila = () => {
         alignItems: 'center',
         justifyContent: 'center',
     };
+
+    const stilZaNavBar = {
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        zIndex: 1000,
+    }
 
     const sacuvajIzmene = () => {
         if (ime.length === 0 || /\d/.test(ime) || !/^[a-zA-Z\s]*$/.test(ime)) {
@@ -114,18 +123,37 @@ const IzmenaProfila = () => {
     }
 
     useEffect(() => {
-        podesiIme(data.ime || '');
-        podesiPrezime(data.prezime || '');
-        podesiAdresu(data.adresa || '');
-        podesiGrad(data.grad || '');
-        podesiDrzavu(data.drzava || '');
-        podesiBrTel(data.brTel || '');
-        podesiEmail(data.email || '');
-        podesiLozinku(data.lozinka || '');
-    }, [data]);
+        podesiIme(podaci.ime || '');
+        podesiPrezime(podaci.prezime || '');
+        podesiAdresu(podaci.adresa || '');
+        podesiGrad(podaci.grad || '');
+        podesiDrzavu(podaci.drzava || '');
+        podesiBrTel(podaci.brTel || '');
+        podesiEmail(podaci.email || '');
+        podesiLozinku(podaci.lozinka || '');
+    }, [podaci]);
 
     return (
         <div style={stilCeleStranice}>
+            <div style={stilZaNavBar}>
+                <ul className="nav nav-pills nav-fill">
+                    <li className="nav-item">
+                        <Link to="/" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Početna</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/Profil" className="nav-link active" style={{ color: 'yellow', fontWeight: "bold" }}>Profil</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Pregled računa</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Uplata i konverzija valuta</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Istorijat kupovina</Link>
+                    </li>
+                </ul>
+            </div>
             <div className="kontejner" style={stilKontejnera}>
                 <div className="forma" style={stilForme}>
                     <h1 style={stilNaslova}>Pregled profila</h1>
