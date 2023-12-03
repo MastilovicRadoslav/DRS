@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const UzivoPracenjeKupovina = () => {
 
-    const [data, setData] = useState([]);
+    const [podaci, podesiPodatke] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/Uzivo');
-                setData(response.data);
+                const odgovor = await axios.get('http://localhost:5000/Uzivo');
+                podesiPodatke(odgovor.data);
             } catch (error) {
                 console.error('Greška: ', error);
             }
@@ -21,7 +22,8 @@ const UzivoPracenjeKupovina = () => {
 
     const stilKontejnera = {
         textAlign: 'center',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        borderRadius: '10px'
     };
 
     const stilForme = {
@@ -71,8 +73,34 @@ const UzivoPracenjeKupovina = () => {
         justifyContent: 'center',
     };
 
+    const stilZaNavBar = {
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        zIndex: 1000,
+    }
+
     return (
         <div style={stilCeleStranice} >
+            <div style={stilZaNavBar}>
+                <ul className="nav nav-pills nav-fill">
+                    <li className="nav-item">
+                        <Link to="/" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Početna</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/Proizvod" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Dodavanje proizvoda</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Povećanje količine proizvoda</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/Uzivo" className="nav-link active" style={{ color: 'yellow', fontWeight: "bold" }}>Uživo praćenje kupovina</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Verifikacija naloga</Link>
+                    </li>
+                </ul>
+            </div>
             <div className='uzivoPracenjeKupovina'>
                 <div className="kontejner" style={stilKontejnera}>
                     <div className="forma" style={stilForme}>
@@ -88,7 +116,7 @@ const UzivoPracenjeKupovina = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {data.map((item, index) => (
+                                {podaci.map((item, index) => (
                                     <tr key={index}>
                                         <td style={stilRedaUTabeli}>{item.nazivProizvoda}</td>
                                         <td style={stilRedaUTabeli}>{item.cena}</td>
