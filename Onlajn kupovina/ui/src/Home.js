@@ -13,7 +13,7 @@ const Pocetna = () => {
         display: 'flex',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        gap: '15px',
+        gap: '25px',
     };
 
     const stilCeleStranice = {

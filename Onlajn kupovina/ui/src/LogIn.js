@@ -13,7 +13,8 @@ const Prijava = () => {
         textAlign: 'center',
         backgroundColor: 'white',
         width: '280px',
-        height: '180px'
+        height: '180px',
+        borderRadius: '10px'
     };
 
     const stilForme = {

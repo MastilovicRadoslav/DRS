@@ -19,7 +19,8 @@ const Registracija = () => {
         textAlign: 'center',
         backgroundColor: 'white',
         width: '320px',
-        height: '400px'
+        height: '400px',
+        borderRadius: '10px',
     };
 
     const stilForme = {
