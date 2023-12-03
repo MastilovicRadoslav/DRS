@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 CORS(app, supports_credentials=True)
 
+# Test podaci za prikaz početnih proizvoda
 proizvodi = [
     Proizvod(
         naziv= 'Laptop - ASUS ROG Strix G17',
@@ -47,6 +48,7 @@ proizvodi = [
     )
 ]
 
+# Admin u našoj aplikaciji
 Korisnici = [
     Korisnik(
         ime= 'admin',
@@ -55,7 +57,7 @@ Korisnici = [
         grad= 'Novi Sad',
         drzava= 'Srbija',
         brojTelefona= '021450810',
-        email= 'drsProjekat2023@gmail.com',
+        email= 'drsprojekat2023@gmail.com',
         lozinka= 'drsadmin'
     )
 ]
@@ -77,7 +79,7 @@ def prijava():
     
     app.logger.info(f"\nEmail: {email}\nLozinka: {lozinka}")
 
-   
+
     response_data = {
         "message": "Podaci uspješno primljeni",
         "email": email,
@@ -103,11 +105,11 @@ def registracija():
     
     app.logger.info(f"\nIme: {ime}\nPrezime: {prezime}\nAdresa: {adresa}\nGrad: {grad}\nDrzava: {drzava}\nBroj Telefona: {brojTelefona}\nEmail: {email}\nLozinka: {lozinka}")
     
-    subject = "Registrovan je novi korisnik"
-    body = f"Podaci o korisniku:\nIme: {ime}\nPrezime: {prezime}\nAdresa: {adresa}\nGrad: {grad}\nDrzava: {drzava}\nBroj Telefona: {brojTelefona}\nEmail: {email}\nLozinka: {lozinka}"
-    to_email = "drsprojekat2023@gmail.com"
+    naslov = "Registrovan je novi korisnik"
+    telo = f"Podaci o korisniku:\nIme: {ime}\nPrezime: {prezime}\nAdresa: {adresa}\nGrad: {grad}\nDrzava: {drzava}\nBroj Telefona: {brojTelefona}\nEmail: {email}\nLozinka: {lozinka}"
+    primaoc = "drsprojekat2023@gmail.com"
 
-    posalji_email(subject, body, to_email)
+    posalji_email(naslov, telo, primaoc)
     
     response_data = {
         "message": "Podaci uspješno primljeni",
@@ -210,12 +212,14 @@ def izmenaProfila():
 
 # Prikaz podataka na stranici Uzivo pracenje kupovina
 @app.route('/Uzivo', methods=['GET'])
-def get_data():
+def prikazZaUzivoPracenje():
     data = [
         {
+            'slika' : proizvod.slika,
             'nazivProizvoda': proizvod.naziv,
             'cena': proizvod.cena,
             'valuta': proizvod.valuta,
+            'kupac' : 'radoslav930@gmail.com'
         }
         for proizvod in proizvodi
     ]
@@ -235,7 +239,20 @@ def posaljiProizvod():
         for proizvod in proizvodi
     ]
 
-    return jsonify(data)
+    global prijavljen
+    priljavjen_i_proizvodi = {}
+    if prijavljen is not None:
+        priljavjen_i_proizvodi = {
+            'email': prijavljen.email,
+            'proizvodi': data
+        }
+    else:
+        priljavjen_i_proizvodi = {
+            'email': '',
+            'proizvodi': data
+        }
+
+    return jsonify(priljavjen_i_proizvodi)
 
 # Prikaz podataka na stranici za izmenu profila
 @app.route('/Profil', methods=['GET'])
@@ -257,6 +274,7 @@ def izmeniProfil():
         }
 
     return jsonify(data)
+
 
 # Main
 if __name__ == "__main__":
