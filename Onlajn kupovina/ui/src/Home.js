@@ -51,7 +51,7 @@ const Pocetna = () => {
         const fetchData = async () => {
             try {
                 const odgovor = await axios.get('http://localhost:5000/');
-                podesiPodatke(odgovor.data);
+                podesiPodatke(odgovor.data.proizvodi);
                 const email = odgovor.data.email;
 
                 if (email === '') {

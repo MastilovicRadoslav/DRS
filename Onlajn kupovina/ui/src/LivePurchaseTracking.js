@@ -79,6 +79,11 @@ const UzivoPracenjeKupovina = () => {
         width: '100%',
         zIndex: 1000,
     }
+    
+    const stilSlike = {
+        width: '80px',
+        height: 'auto%',
+    }
 
     return (
         <div style={stilCeleStranice} >
@@ -108,6 +113,7 @@ const UzivoPracenjeKupovina = () => {
                         <table style={stilTabele}>
                             <thead>
                                 <tr>
+                                    <th style={stilZaglavlja}>Slika proizvoda</th>
                                     <th style={stilZaglavlja}>Naziv proizvoda</th>
                                     <th style={stilZaglavlja}>Cena</th>
                                     <th style={stilZaglavlja}>Valuta</th>
@@ -118,6 +124,9 @@ const UzivoPracenjeKupovina = () => {
                             <tbody>
                                 {podaci.map((item, index) => (
                                     <tr key={index}>
+                                        <td style={stilRedaUTabeli}>
+                                            <img style={stilSlike} src={item.slika} alt="" />
+                                        </td>
                                         <td style={stilRedaUTabeli}>{item.nazivProizvoda}</td>
                                         <td style={stilRedaUTabeli}>{item.cena}</td>
                                         <td style={stilRedaUTabeli}>{item.valuta}</td>
