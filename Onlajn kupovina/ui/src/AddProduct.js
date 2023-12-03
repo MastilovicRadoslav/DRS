@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const DodajProizvod = () => {
 
@@ -18,7 +19,8 @@ const DodajProizvod = () => {
         backgroundColor: 'white',
         marginLeft: '950px',
         width: '370px',
-        height: '260px'
+        height: '260px',
+        borderRadius: '10px'
     };
 
     const stilForme = {
@@ -58,6 +60,13 @@ const DodajProizvod = () => {
         alignItems: 'center',
     };
 
+    const stilZaNavBar = {
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        zIndex: 1000,
+    }
+
     useEffect(() => {
         const dobaviValute = async () => {
             const odgovor = await axios.get('https://open.er-api.com/v6/latest');
@@ -94,6 +103,25 @@ const DodajProizvod = () => {
     return (
         <div style={stilCeleStranice}>
             <div className='proizvod'>
+                <div style={stilZaNavBar}>
+                    <ul className="nav nav-pills nav-fill">
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Početna</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/Proizvod" className="nav-link active" style={{ color: 'yellow', fontWeight: "bold" }}>Dodavanje proizvoda</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Povećanje količine proizvoda</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/Uzivo" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Uživo praćenje kupovina</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Verifikacija naloga</Link>
+                        </li>
+                    </ul>
+                </div>
                 <div className="kontejner" style={stilKontejnera}>
                     <div className="forma" style={stilForme}>
                         <h1 style={stilNaslova}>Proizvod</h1>
