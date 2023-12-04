@@ -4,6 +4,7 @@ from notificationBy_Email import posalji_email
 from Product import Proizvod
 from User import Korisnik
 from convert_image_path import zamenaPutanje
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -79,7 +80,6 @@ def prijava():
     
     app.logger.info(f"\nEmail: {email}\nLozinka: {lozinka}")
 
-
     response_data = {
         "message": "Podaci uspješno primljeni",
         "email": email,
@@ -101,7 +101,6 @@ def registracija():
     brojTelefona = request.json['brTel']
     email = request.json['email']
     lozinka = request.json['lozinka']
-
     
     app.logger.info(f"\nIme: {ime}\nPrezime: {prezime}\nAdresa: {adresa}\nGrad: {grad}\nDrzava: {drzava}\nBroj Telefona: {brojTelefona}\nEmail: {email}\nLozinka: {lozinka}")
     
@@ -151,7 +150,6 @@ def dodavanjeProizvoda():
         "kolicina": kolicina,
     }
 
-    
     return jsonify(response_data), 200
 
 # Izmjena profila
@@ -275,6 +273,30 @@ def izmeniProfil():
 
     return jsonify(data)
 
+# Prikaz podataka na stranici Istorijat kupovina
+@app.route('/Istorijat', methods=['GET'])
+def kupljeniProizvodi():
+
+    p = Proizvod(
+        naziv= 'Sapiens: Kratka istorija čovečanstva', 
+        cena= 2676, 
+        valuta= 'RSD',
+        kolicina= 30, 
+        slika= 'Proizvodi/knjiga.jpg'
+    )
+
+    data = [
+        {
+            'slika': p.slika,
+            'nazivProizvoda': p.naziv,
+            'cena': p.cena,
+            'valuta': p.valuta,
+            'kolicina': p.kolicina,
+            'vreme': datetime.now().strftime("%Y.%m.%d %H:%M:%S")
+        }
+    ]
+
+    return jsonify(data)
 
 # Main
 if __name__ == "__main__":
