@@ -6,6 +6,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Pocetna from './Home';
 import IzmenaProfila from './ModifyProfile';
 import UzivoPracenjeKupovina from './LivePurchaseTracking'
+import IstorijatKupovina from './PurchasedProducts';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/Proizvod" element={<DodajProizvod />} ></Route>
           <Route path="/Profil" element={<IzmenaProfila />} ></Route>
           <Route path="/Uzivo" element={<UzivoPracenjeKupovina />} ></Route>
+          <Route path="/Istorijat" element={<IstorijatKupovina />} ></Route>
         </Routes>
       </BrowserRouter>
     </div>
