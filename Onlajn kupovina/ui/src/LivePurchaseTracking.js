@@ -23,7 +23,7 @@ const UzivoPracenjeKupovina = () => {
     const stilKontejnera = {
         textAlign: 'center',
         backgroundColor: 'white',
-        borderRadius: '10px'
+        borderRadius: '5px'
     };
 
     const stilForme = {
@@ -49,7 +49,7 @@ const UzivoPracenjeKupovina = () => {
     };
 
     const stilZaglavlja = {
-        border: '1px solid #ddd',
+        border: '3px solid #ddd',
         textAlign: 'center',
         padding: '12px',
         backgroundColor: 'blue',
@@ -57,10 +57,11 @@ const UzivoPracenjeKupovina = () => {
     };
 
     const stilRedaUTabeli = {
-        border: '1px solid #ddd',
+        border: '3px solid #ddd',
         textAlign: 'center',
         padding: '12px',
-        backgroundColor: '#ecf0f1',
+        backgroundColor: '#bfc1c2',
+        fontWeight: 'bold',
     };
 
     const stilCeleStranice = {

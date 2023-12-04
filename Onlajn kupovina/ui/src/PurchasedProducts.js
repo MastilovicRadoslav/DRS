@@ -10,7 +10,7 @@ const IstorijatKupovina = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const odgovor = await axios.get('http://localhost:5000/');
+                const odgovor = await axios.get('http://localhost:5000/Istorijat');
                 podesiPodatke(odgovor.data);
             } catch (error) {
                 console.error('Greška: ', error);
@@ -23,7 +23,7 @@ const IstorijatKupovina = () => {
     const stilKontejnera = {
         textAlign: 'center',
         backgroundColor: 'white',
-        borderRadius: '10px'
+        borderRadius: '5px'
     };
 
     const stilForme = {
@@ -49,7 +49,7 @@ const IstorijatKupovina = () => {
     };
 
     const stilZaglavlja = {
-        border: '1px solid #ddd',
+        border: '3px solid #ddd',
         textAlign: 'center',
         padding: '12px',
         backgroundColor: 'blue',
@@ -57,10 +57,10 @@ const IstorijatKupovina = () => {
     };
 
     const stilRedaUTabeli = {
-        border: '1px solid #ddd',
+        border: '3px solid #ddd',
         textAlign: 'center',
         padding: '12px',
-        backgroundColor: '#acacac',
+        backgroundColor: '#bfc1c2',
         fontWeight: 'bold'
     };
 
