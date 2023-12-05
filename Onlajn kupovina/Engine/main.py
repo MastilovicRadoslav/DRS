@@ -152,7 +152,7 @@ def dodavanjeProizvoda():
 
     return jsonify(response_data), 200
 
-# Izmjena profila
+# Izmena profila
 @app.route('/Profil', methods=['POST'])
 def izmenaProfila():
     ime = request.json['ime']
@@ -204,6 +204,25 @@ def izmenaProfila():
         "grad": grad,
         "drzava": drzava,
         "brojTelefona": brojTelefona
+    }
+
+    return jsonify(response_data), 200
+
+# Prihvatanje podataka za karticu korisnika
+@app.route('/Kartica', methods=['POST'])
+def dodavanjeKartice():
+
+    brojKartice = request.json['brojKartice']
+    datumIsteka = request.json['datumIsteka']
+    cvv = request.json.get('cvv')
+
+    app.logger.info(f"\nBroj kartice: {brojKartice}\nDatum isteka: {datumIsteka}\nCVV: {cvv}")
+
+    response_data = {
+        "message": "Podaci uspješno primljeni",
+        "brojKartice": brojKartice,
+        "datumIsteka": datumIsteka,
+        "cvv": cvv,
     }
 
     return jsonify(response_data), 200
