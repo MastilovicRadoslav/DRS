@@ -7,6 +7,7 @@ import Pocetna from './Home';
 import IzmenaProfila from './ModifyProfile';
 import UzivoPracenjeKupovina from './LivePurchaseTracking'
 import IstorijatKupovina from './PurchasedProducts';
+import DodavanjeKartice from './AddCard';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/Profil" element={<IzmenaProfila />} ></Route>
           <Route path="/Uzivo" element={<UzivoPracenjeKupovina />} ></Route>
           <Route path="/Istorijat" element={<IstorijatKupovina />} ></Route>
+          <Route path="/Kartica" element={<DodavanjeKartice />} ></Route>
         </Routes>
       </BrowserRouter>
     </div>
