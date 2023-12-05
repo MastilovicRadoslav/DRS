@@ -97,6 +97,9 @@ const IstorijatKupovina = () => {
                         <Link to="/Profil" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Profil</Link>
                     </li>
                     <li className="nav-item">
+                        <Link to="/Kartica" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Dodavanje kartice</Link>
+                    </li>
+                    <li className="nav-item">
                         <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Pregled računa</Link>
                     </li>
                     <li className="nav-item">
