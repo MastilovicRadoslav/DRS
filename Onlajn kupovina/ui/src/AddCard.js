@@ -116,7 +116,7 @@ const DodavanjeKartice = () => {
                         <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Uplata i konverzija valuta</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/Kupovine" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Istorijat kupovina</Link>
+                        <Link to="/Istorijat" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Istorijat kupovina</Link>
                     </li>
                 </ul>
             </div>

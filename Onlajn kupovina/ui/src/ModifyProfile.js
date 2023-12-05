@@ -62,6 +62,7 @@ const IzmenaProfila = () => {
         fontWeight: 'bold',
         marginTop: 0,
         textAlign: 'center',
+        color: '#007BFF',
     };
 
     const stilCeleStranice = {
