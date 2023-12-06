@@ -77,13 +77,13 @@ const DodavanjeKartice = () => {
 
     const dodajKarticu = () => {
         if (!brojKartice || !datumIsteka || !cvv) {
-            alert('Molimo vas da popunite sva polja kartice.');
+            alert('Molimo vas da popunite sva polja kartice !!');
         } else if (!/^[0-9]{16}$/.test(brojKartice)) {
-            alert('Neispravan format broja kartice. Molimo unesite 16 brojeva.');
+            alert('Neispravan format broja kartice. Molimo vas unesite 16 brojeva !!');
         } else if (!/^(0[1-9]|1[0-2])\/[0-9]{2}$/.test(datumIsteka)) {
-            alert('Neispravan format datuma isteka. Molimo unesite u formatu MM/YY.');
+            alert('Neispravan format datuma isteka. Molimo vas unesite u formatu MM/YY !!');
         } else if (!/^[0-9]{3}$/.test(cvv)) {
-            alert('Neispravan format CVV. Molimo unesite 3 broja.');
+            alert('Neispravan format CVV. Molimo vas unesite 3 broja !!');
         } else {
             axios
                 .post('http://127.0.0.1:5000/Kartica', {
@@ -130,6 +130,7 @@ const DodavanjeKartice = () => {
                         style={stilZaUnos}
                         type="text"
                         id="brojKartice"
+                        maxLength={16}
                         value={brojKartice}
                         onChange={(e) => postaviBrojKartice(e.target.value)}
                     />
@@ -141,6 +142,7 @@ const DodavanjeKartice = () => {
                         style={stilZaUnos}
                         type="text"
                         id="datumIsteka"
+                        maxLength={5}
                         value={datumIsteka}
                         onChange={(e) => postaviDatumIsteka(e.target.value)}
                     />
@@ -161,7 +163,7 @@ const DodavanjeKartice = () => {
                         className="btn btn-outline-primary"
                         id="prijavaDugme"
                         style={stilZaDugme}
-                        type="submit"
+                        type="button"
                         value="Dodaj karticu"
                         onClick={dodajKarticu}
                     />
