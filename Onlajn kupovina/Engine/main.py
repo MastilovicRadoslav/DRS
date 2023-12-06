@@ -1,17 +1,13 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
 from notificationBy_Email import posalji_email
 from Product import Proizvod
 from User import Korisnik
 from convert_image_path import zamenaPutanje
 from datetime import datetime
-
-app = Flask(__name__)
-
-CORS(app, supports_credentials=True)
+from dataBase import dodavanjeKorisnikaUBazu, dodavanjeProizvodaUBazu, citanjeKorisnikaIzBaze, citanjeProizvodaIzBaze
+from config import request, jsonify, app
 
 # Test podaci za prikaz početnih proizvoda
-proizvodi = [
+pocetniProizvodi = [
     Proizvod(
         naziv= 'Laptop - ASUS ROG Strix G17',
         cena= 222000,
@@ -50,8 +46,7 @@ proizvodi = [
 ]
 
 # Admin u našoj aplikaciji
-Korisnici = [
-    Korisnik(
+admin = Korisnik(
         ime= 'admin',
         prezime= 'drs',
         adresa= 'Trg Dositeja Obradovica 6',
@@ -61,7 +56,13 @@ Korisnici = [
         email= 'drsprojekat2023@gmail.com',
         lozinka= 'drsadmin'
     )
-]
+
+# Učitavanje iz baze
+korisnici = citanjeKorisnikaIzBaze()
+proizvodi = citanjeProizvodaIzBaze()
+
+for p in pocetniProizvodi:
+    dodavanjeProizvodaUBazu(p)
 
 prijavljen = None
 
@@ -73,7 +74,9 @@ def prijava():
     lozinka = request.json['lozinka']
     global prijavljen
 
-    for korisnik in Korisnici:
+    korisnici = citanjeKorisnikaIzBaze()
+
+    for korisnik in korisnici:
         if korisnik.email == email:
             prijavljen = korisnik
             break
@@ -101,13 +104,17 @@ def registracija():
     brojTelefona = request.json['brTel']
     email = request.json['email']
     lozinka = request.json['lozinka']
+
+    # Upis novih korisnika u bazu
+    novo_Registrovani = Korisnik(ime, prezime, adresa, grad, drzava, brojTelefona, email, lozinka)
+    dodavanjeKorisnikaUBazu(novo_Registrovani)
     
     app.logger.info(f"\nIme: {ime}\nPrezime: {prezime}\nAdresa: {adresa}\nGrad: {grad}\nDrzava: {drzava}\nBroj Telefona: {brojTelefona}\nEmail: {email}\nLozinka: {lozinka}")
     
+    # Podešavanje i slanje email-a 
     naslov = "Registrovan je novi korisnik"
     telo = f"Podaci o korisniku:\nIme: {ime}\nPrezime: {prezime}\nAdresa: {adresa}\nGrad: {grad}\nDrzava: {drzava}\nBroj Telefona: {brojTelefona}\nEmail: {email}\nLozinka: {lozinka}"
     primaoc = "drsprojekat2023@gmail.com"
-
     posalji_email(naslov, telo, primaoc)
     
     response_data = {
@@ -135,13 +142,15 @@ def dodavanjeProizvoda():
     kolicina = request.json['kolicina']
     slika = request.json['slika']
 
+    # Zamena putanje sa fakePath/nazivFajla -> Proizvodi/nazivFajla
     slika = zamenaPutanje(slika)
 
-    proizvodi.append(Proizvod(naziv, cena, valuta, kolicina, slika))
+    # Upis novih prozivoda u bazu
+    novi_proizvod = Proizvod(naziv, cena, valuta, kolicina, slika)
+    dodavanjeProizvodaUBazu(novi_proizvod)
     
     app.logger.info(f"\nNaziv proivoda: {naziv}\ncena: {cena}\nvaluta: {valuta}\nkolicina {kolicina}\nslika {slika}")
 
-    
     response_data = {
         "message": "Podaci uspješno primljeni",
         "naziv": naziv,
@@ -165,7 +174,7 @@ def izmenaProfila():
     lozinka = request.json['lozinka']
     global prijavljen
 
-    for korisnik in Korisnici:
+    for korisnik in korisnici:
         if korisnik.ime != ime:
             prijavljen.ime = ime
 
@@ -215,7 +224,7 @@ def dodavanjeKartice():
     brojKartice = request.json['brojKartice']
     datumIsteka = request.json['datumIsteka']
     cvv = request.json.get('cvv')
-
+    
     app.logger.info(f"\nBroj kartice: {brojKartice}\nDatum isteka: {datumIsteka}\nCVV: {cvv}")
 
     response_data = {
@@ -230,6 +239,10 @@ def dodavanjeKartice():
 # Prikaz podataka na stranici Uzivo pracenje kupovina
 @app.route('/Uzivo', methods=['GET'])
 def prikazZaUzivoPracenje():
+
+    # Učitavanje proizvoda iz baze
+    proizvodi = citanjeProizvodaIzBaze()
+
     data = [
         {
             'slika' : proizvod.slika,
@@ -240,11 +253,16 @@ def prikazZaUzivoPracenje():
         }
         for proizvod in proizvodi
     ]
+    
     return jsonify(data)
 
 # Prikaz podataka na pocetnoj stranici
 @app.route('/', methods=['GET'])
 def posaljiProizvod():
+
+    # Učitavanje proizvoda iz baze
+    proizvodi = citanjeProizvodaIzBaze()
+
     data = [
         {
             'naziv': proizvod.naziv,
@@ -314,6 +332,19 @@ def kupljeniProizvodi():
             'vreme': datetime.now().strftime("%Y.%m.%d %H:%M:%S")
         }
     ]
+
+    return jsonify(data)
+
+# Prikaz podataka na stranici Uzivo pracenje kupovina
+@app.route('/Pregled', methods=['GET'])
+def prikazRacuna():
+
+    data = {
+        'brojKartice' : '1234567890123456',
+        'datumIsteka': '12/23',
+        'stanje': '12312312.11',
+        'valuta': 'EUR',
+    }
 
     return jsonify(data)
 
