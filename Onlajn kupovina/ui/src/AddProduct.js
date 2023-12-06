@@ -20,7 +20,7 @@ const DodajProizvod = () => {
         marginLeft: '950px',
         width: '370px',
         height: '260px',
-        borderRadius: '10px'
+        borderRadius: '8px'
     };
 
     const stilForme = {

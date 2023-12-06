@@ -32,8 +32,8 @@ const IzmenaProfila = () => {
         textAlign: 'center',
         backgroundColor: 'white',
         width: '320px',
-        height: '400px',
-        borderRadius: '10px'
+        height: '395px',
+        borderRadius: '8px'
     };
 
     const stilForme = {
@@ -148,7 +148,7 @@ const IzmenaProfila = () => {
                         <Link to="/Kartica" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Dodavanje kartice</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Pregled računa</Link>
+                        <Link to="/Pregled" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Pregled računa</Link>
                     </li>
                     <li className="nav-item">
                         <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Uplata i konverzija valuta</Link>

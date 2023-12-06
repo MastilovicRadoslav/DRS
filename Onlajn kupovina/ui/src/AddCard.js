@@ -110,7 +110,7 @@ const DodavanjeKartice = () => {
                         <Link to="/Kartica" className="nav-link active" style={{ color: 'yellow', fontWeight: "bold" }}>Dodavanje kartice</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Pregled računa</Link>
+                        <Link to="/Pregled" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Pregled računa</Link>
                     </li>
                     <li className="nav-item">
                         <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Uplata i konverzija valuta</Link>

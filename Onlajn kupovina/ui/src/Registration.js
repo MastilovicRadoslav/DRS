@@ -20,7 +20,7 @@ const Registracija = () => {
         backgroundColor: 'white',
         width: '320px',
         height: '400px',
-        borderRadius: '10px',
+        borderRadius: '8px',
     };
 
     const stilForme = {

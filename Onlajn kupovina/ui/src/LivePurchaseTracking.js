@@ -23,7 +23,7 @@ const UzivoPracenjeKupovina = () => {
     const stilKontejnera = {
         textAlign: 'center',
         backgroundColor: 'white',
-        borderRadius: '5px'
+        borderRadius: '8px'
     };
 
     const stilForme = {

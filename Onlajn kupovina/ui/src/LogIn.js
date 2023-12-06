@@ -14,7 +14,7 @@ const Prijava = () => {
         backgroundColor: 'white',
         width: '280px',
         height: '180px',
-        borderRadius: '10px'
+        borderRadius: '8px'
     };
 
     const stilForme = {
