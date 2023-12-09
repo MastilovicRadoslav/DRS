@@ -61,9 +61,6 @@ admin = Korisnik(
 korisnici = citanjeKorisnikaIzBaze()
 proizvodi = citanjeProizvodaIzBaze()
 
-for p in pocetniProizvodi:
-    dodavanjeProizvodaUBazu(p)
-
 prijavljen = None
 
 # Obrada prijavljivanja
@@ -128,7 +125,6 @@ def registracija():
         "drzava": drzava,
         "brojTelefona": brojTelefona
     }
-
     
     return jsonify(response_data), 200
 
@@ -162,7 +158,7 @@ def dodavanjeProizvoda():
     return jsonify(response_data), 200
 
 # Izmena profila
-@app.route('/Profil', methods=['POST'])
+@app.route('/Profil', methods=['PUT'])
 def izmenaProfila():
     ime = request.json['ime']
     prezime = request.json['prezime']
@@ -232,6 +228,28 @@ def dodavanjeKartice():
         "brojKartice": brojKartice,
         "datumIsteka": datumIsteka,
         "cvv": cvv,
+    }
+
+    return jsonify(response_data), 200
+
+# Izmena količine od strane admina
+@app.route('/IzmenaKolicine', methods=['PUT'])
+def izmenjenaKolicina():
+
+    naziv = request.json['naziv']
+    cena = request.json['cena']
+    valuta = request.json.get('valuta')
+    kolicina = request.json['kolicina']
+    slika = request.json['slika']
+
+    app.logger.info(f"\nNaziv proivoda: {naziv}\ncena: {cena}\nvaluta: {valuta}\nkolicina {kolicina}\nslika {slika}")
+
+    response_data = {
+        "message": "Podaci uspješno primljeni",
+        "naziv": naziv,
+        "cena": cena,
+        "valuta": valuta,
+        "kolicina": kolicina,
     }
 
     return jsonify(response_data), 200
@@ -347,6 +365,27 @@ def prikazRacuna():
     }
 
     return jsonify(data)
+
+# Prikaz podataka za izmenu količine
+@app.route('/IzmenaKolicine', methods=['GET'])
+def izmenaKolicine():
+
+    proizvodi = citanjeProizvodaIzBaze()
+
+    data = [
+        {
+            'naziv': proizvod.naziv,
+            'cena': proizvod.cena,
+            'valuta': proizvod.valuta,
+            'kolicina': proizvod.kolicina,
+            'slika': proizvod.slika,
+        }
+        for proizvod in proizvodi
+    ]
+
+    return jsonify(data)
+
+
 
 # Main
 if __name__ == "__main__":
