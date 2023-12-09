@@ -109,7 +109,7 @@ const IzmenaProfila = () => {
             alert("Lozinka mora biti popunjena !!")
         }
         else {
-            axios.post('http://127.0.0.1:5000/Profil', {
+            axios.put('http://127.0.0.1:5000/Profil', {
                 ime: ime,
                 prezime: prezime,
                 adresa: adresa,
