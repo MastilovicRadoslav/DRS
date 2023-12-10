@@ -5,6 +5,7 @@ from convert_image_path import zamenaPutanje
 from datetime import datetime
 from dataBase import dodavanjeKorisnikaUBazu, dodavanjeProizvodaUBazu, citanjeKorisnikaIzBaze, citanjeProizvodaIzBaze
 from config import request, jsonify, app
+from Card import Kartica, serializacija_kartice
 
 # Test podaci za prikaz početnih proizvoda
 pocetniProizvodi = [
@@ -56,6 +57,9 @@ admin = Korisnik(
         email= 'drsprojekat2023@gmail.com',
         lozinka= 'drsadmin'
     )
+
+# Kartica Admina
+kartica_admina = Kartica('9999666696966969', '12/28', '666', '0', 'USD', admin, True)
 
 # Učitavanje iz baze
 korisnici = citanjeKorisnikaIzBaze()
