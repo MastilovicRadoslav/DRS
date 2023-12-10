@@ -9,6 +9,7 @@ import UzivoPracenjeKupovina from './LivePurchaseTracking'
 import IstorijatKupovina from './PurchasedProducts';
 import DodavanjeKartice from './AddCard';
 import PrikazRacuna from './StatusOnCard'
+import IzmenaKolicine from './QuantityModification';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/Istorijat" element={<IstorijatKupovina />} ></Route>
           <Route path="/Kartica" element={<DodavanjeKartice />} ></Route>
           <Route path="/Pregled" element={<PrikazRacuna />} ></Route>
+          <Route path="/IzmenaKolicine" element={<IzmenaKolicine />} ></Route>
         </Routes>
       </BrowserRouter>
     </div>
