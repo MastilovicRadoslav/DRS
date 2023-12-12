@@ -104,7 +104,7 @@ const PrikazRacuna = () => {
                         <Link to="/Pregled" className="nav-link active" style={{ color: 'yellow', fontWeight: "bold" }}>Pregled računa</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Uplata i konverzija valuta</Link>
+                        <Link to="/UplataKonverzija" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Uplata i konverzija valuta</Link>
                     </li>
                     <li className="nav-item">
                         <Link to="/Istorijat" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Istorijat kupovina</Link>

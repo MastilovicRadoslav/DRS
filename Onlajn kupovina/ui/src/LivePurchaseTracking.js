@@ -98,7 +98,7 @@ const UzivoPracenjeKupovina = () => {
                         <Link to="/Proizvod" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Dodavanje proizvoda</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Povećanje količine proizvoda</Link>
+                        <Link to="/IzmenaKolicine" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Povećanje količine proizvoda</Link>
                     </li>
                     <li className="nav-item">
                         <Link to="/Uzivo" className="nav-link active" style={{ color: 'yellow', fontWeight: "bold" }}>Uživo praćenje kupovina</Link>
