@@ -85,7 +85,6 @@ def prijava():
         "lozinka": lozinka
     }
 
-    
     return jsonify(response_data), 200
 
 # Obrada registracije
@@ -261,6 +260,56 @@ def izmenjenaKolicina():
 
     return jsonify(response_data), 200
 
+# Prijem podataka sa stranice Verifikacija
+@app.route('/Verifikacija', methods=['PUT'])
+def verifikovaneKartice():
+
+    email = request.json['email']
+    odobrena = request.json['odobrena']
+
+    if(odobrena == True):
+        print("OK" + "  " + email)
+
+    data = {
+        'massage': 'Sve je ok'
+    }
+
+    return jsonify(data)
+
+# Prijem podataka sa stranice UplataKonverzija
+@app.route('/Konverzija', methods=['PUT'])
+def konverzija():
+
+    email = request.json['email']
+    brojKartice = request.json['brojKartice']
+    stanje = request.json['stanje']
+    valuta = request.json['valuta']
+
+    app.logger.info(f"\n {email} {brojKartice} {stanje} {valuta}")
+
+    data = {
+        'massage': 'Sve je ok'
+    }
+
+    return jsonify(data)
+
+# Prijem podataka sa stranice UplataKonverzija
+@app.route('/Uplata', methods=['PUT'])
+def uplata():
+
+    email = request.json['email']
+    brojKartice = request.json['brojKartice']
+    iznos = request.json['iznos']
+    valuta = request.json['valuta']
+
+    app.logger.info(f"\n {email} {brojKartice} {iznos} {valuta}")
+
+    data = {
+        'massage': 'Sve je ok'
+    }
+
+    return jsonify(data)
+
 # Prikaz podataka na stranici Uzivo pracenje kupovina
 @app.route('/Uzivo', methods=['GET'])
 def prikazZaUzivoPracenje():
@@ -392,7 +441,36 @@ def izmenaKolicine():
 
     return jsonify(data)
 
+# Prikaz podataka na stranici za Verifikaciju
+@app.route('/Verifikacija', methods=['GET'])
+def verifikacijaKartica():
 
+    kartice = [
+        Kartica('1111111111111111', '12/27', '111', '0', 'RSD', korisnici[1], False),
+        Kartica('1111111111111111', '12/27', '111', '0', 'RSD', korisnici[2], False),
+        ]
+
+    serialized_kartice = [serializacija_kartice(kartica) for kartica in kartice]
+
+    data = {
+        'kartica': serialized_kartice
+    }
+
+    return jsonify(data)
+
+# Prikaz podataka na stranici UplataKonverzija
+@app.route('/UplataKonverzija', methods=['GET'])
+def uplataiKonverzija():
+
+    kartica = Kartica('1111111111111111', '12/27', '111', '10000', 'RSD', korisnici[1], False)
+
+    serialized_kartice = serializacija_kartice(kartica)
+
+    data = {
+        'kartica': serialized_kartice
+    }
+
+    return jsonify(data)
 
 # Main
 if __name__ == "__main__":
