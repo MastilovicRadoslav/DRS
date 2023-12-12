@@ -10,6 +10,7 @@ import IstorijatKupovina from './PurchasedProducts';
 import DodavanjeKartice from './AddCard';
 import PrikazRacuna from './StatusOnCard'
 import IzmenaKolicine from './QuantityModification';
+import UplataKonverzija from './PaymentConversion';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/Kartica" element={<DodavanjeKartice />} ></Route>
           <Route path="/Pregled" element={<PrikazRacuna />} ></Route>
           <Route path="/IzmenaKolicine" element={<IzmenaKolicine />} ></Route>
+		  <Route path="/UplataKonverzija" element={<UplataKonverzija />} ></Route>
         </Routes>
       </BrowserRouter>
     </div>
