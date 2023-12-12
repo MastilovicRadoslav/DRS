@@ -3,9 +3,9 @@ from Product import Proizvod
 from User import Korisnik
 from convert_image_path import zamenaPutanje
 from datetime import datetime
-from dataBase import dodavanjeKorisnikaUBazu, dodavanjeProizvodaUBazu, citanjeKorisnikaIzBaze, citanjeProizvodaIzBaze
+from dataBase import *
 from config import request, jsonify, app
-from Card import Kartica, serializacija_kartice
+from Card import *
 
 # Test podaci za prikaz početnih proizvoda
 pocetniProizvodi = [
@@ -59,7 +59,7 @@ admin = Korisnik(
     )
 
 # Kartica Admina
-kartica_admina = Kartica('9999666696966969', '12/28', '666', '0', 'USD', admin, True)
+kartica_admina = Kartica('9999666696966969', '12/28', '666', '0', 'USD', admin.email, "Da")
 
 # Učitavanje iz baze
 korisnici = citanjeKorisnikaIzBaze()
@@ -75,12 +75,7 @@ def prijava():
     lozinka = request.json['lozinka']
     global prijavljen
 
-    korisnici = citanjeKorisnikaIzBaze()
-
-    for korisnik in korisnici:
-        if korisnik.email == email:
-            prijavljen = korisnik
-            break
+    prijavljen = nadjiKorisnikaPoEmailu(email)
     
     app.logger.info(f"\nEmail: {email}\nLozinka: {lozinka}")
 
@@ -199,8 +194,10 @@ def izmenaProfila():
         if korisnik.lozinka != lozinka:
             prijavljen.lozinka = lozinka
 
-    app.logger.info(f"Email: {email}, Password: {lozinka}")
+    k = Korisnik(ime, prezime, adresa, grad, drzava, brojTelefona, email, lozinka)
+    azuriranjeKorisnikaUBazi(k)
 
+    app.logger.info(f"Email: {email}, Password: {lozinka}")
     app.logger.info(f"Ime: {ime}, Prezime: {prezime}, Adresa: {adresa}, Grad: {grad}, Drzava: {drzava}, Broj Telefona: {brojTelefona}, Email: {email}, Lozinka: {lozinka}")
 
     response_data = {
@@ -225,6 +222,9 @@ def dodavanjeKartice():
     datumIsteka = request.json['datumIsteka']
     cvv = request.json.get('cvv')
     
+    kartica = Kartica(brojKartice=brojKartice,datumIsteka=datumIsteka,ccv=cvv,stanjeNaRacunu=0.0,valuta="USD",odobrena="Ne")
+    dodavanjeKarticeUBazu(kartica)
+
     app.logger.info(f"\nBroj kartice: {brojKartice}\nDatum isteka: {datumIsteka}\nCVV: {cvv}")
 
     response_data = {
@@ -245,6 +245,9 @@ def izmenjenaKolicina():
     valuta = request.json.get('valuta')
     kolicina = request.json['kolicina']
     slika = request.json['slika']
+
+    p = Proizvod(naziv, cena, valuta, kolicina, slika)
+    azuriranjeProizvodaUBazi(p)
 
     app.logger.info(f"\nNaziv proivoda: {naziv}\ncena: {cena}\nvaluta: {valuta}\nkolicina {kolicina}\nslika {slika}")
 
