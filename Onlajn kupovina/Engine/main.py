@@ -413,14 +413,26 @@ def kupljeniProizvodi():
 @app.route('/Pregled', methods=['GET'])
 def prikazRacuna():
 
-    data = {
-        'brojKartice' : '1234567890123456',
-        'datumIsteka': '12/23',
-        'stanje': '12312312.11',
-        'valuta': 'EUR',
-    }
+    kartica = None
+    if prijavljen is not None:
+        kartica = nadjiKarticuUBaziSaVlasnikom(prijavljen.email)
 
-    return jsonify(data)
+    if kartica is not None and kartica.odobrena =='Da':
+        data = {
+            'brojKartice' : kartica.brojKartice,
+            'datumIsteka': kartica.datumIsteka,
+            'stanje': kartica.stanjeNaRacunu,
+            'valuta': kartica.valuta
+        }
+        return jsonify(data)
+    else:
+        data = {
+            'brojKartice' : '',
+            'datumIsteka': '',
+            'stanje': '',
+            'valuta': ''
+        }
+        return jsonify(data)
 
 # Prikaz podataka za izmenu količine
 @app.route('/IzmenaKolicine', methods=['GET'])
