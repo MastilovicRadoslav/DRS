@@ -11,6 +11,7 @@ const PrikazRacuna = () => {
     const [valuta, postaviValutu] = useState('');
     const [podaci, podesiPodatke] = useState([]);
 
+    // Prijem podataka sa servera o kartici
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -30,18 +31,18 @@ const PrikazRacuna = () => {
         width: '350px',
         padding: '20px',
         borderRadius: '8px',
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
     };
 
     const stilForme = {
-        textAlign: 'left',
+        textAlign: 'left'
     };
 
     const stilZaLabelu = {
         fontFamily: 'Times New Roman',
         fontWeight: 'bold',
         marginTop: '10px',
-        display: 'block',
+        display: 'block'
     };
 
     const stilZaUnos = {
@@ -52,7 +53,7 @@ const PrikazRacuna = () => {
         marginBottom: '15px',
         boxSizing: 'border-box',
         border: '1px solid #ccc',
-        borderRadius: '4px',
+        borderRadius: '4px'
     };
 
     const stilNaslova = {
@@ -60,7 +61,7 @@ const PrikazRacuna = () => {
         fontWeight: 'bold',
         marginTop: '0',
         marginBottom: '20px',
-        color: '#007BFF',
+        color: '#007BFF'
     };
 
     const stilCeleStranice = {
@@ -71,22 +72,24 @@ const PrikazRacuna = () => {
         height: '100vh',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     };
 
     const stilZaNavBar = {
         position: 'fixed',
         top: 0,
         width: '100%',
-        zIndex: 1000,
+        zIndex: 1000
     }
 
+    // Podešavanje podataka o kartici za prikaz
     useEffect(() => {
         postaviBrojKartice(podaci.brojKartice || '');
         postaviDatumIsteka(podaci.datumIsteka || '');
         postaviStanje(podaci.stanje || '');
         postaviValutu(podaci.valuta || '');
     }, [podaci]);
+
     return (
         <div style={stilCeleStranice}>
             <div style={stilZaNavBar}>
@@ -122,6 +125,7 @@ const PrikazRacuna = () => {
                         type="text"
                         id="brojKartice"
                         maxLength={16}
+                        readOnly={true}
                         value={brojKartice}
                     />
 
@@ -133,6 +137,7 @@ const PrikazRacuna = () => {
                         type="text"
                         id="datumIsteka"
                         maxLength={5}
+                        readOnly={true}
                         value={datumIsteka}
                     />
 
@@ -144,6 +149,7 @@ const PrikazRacuna = () => {
                         type="text"
                         id="stanje"
                         value={stanje}
+                        readOnly={true}
                     />
 
                     <label style={stilZaLabelu} htmlFor="valuta">
@@ -154,6 +160,7 @@ const PrikazRacuna = () => {
                         type="text"
                         id="valuta"
                         maxLength={3}
+                        readOnly={true}
                         value={valuta}
                     />
                 </form>
