@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const DodavanjeKartice = () => {
+    
     const [brojKartice, postaviBrojKartice] = useState('');
     const [datumIsteka, postaviDatumIsteka] = useState('');
     const [cvv, postaviCVV] = useState('');
-    const redirekcija = useNavigate();
 
     const stilKontejnera = {
         textAlign: 'center',
@@ -16,18 +15,18 @@ const DodavanjeKartice = () => {
         width: '350px',
         padding: '20px',
         borderRadius: '8px',
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
     };
 
     const stilForme = {
-        textAlign: 'left',
+        textAlign: 'left'
     };
 
     const stilZaLabelu = {
         fontFamily: 'Times New Roman',
         fontWeight: 'bold',
         marginTop: '10px',
-        display: 'block',
+        display: 'block'
     };
 
     const stilZaUnos = {
@@ -38,7 +37,7 @@ const DodavanjeKartice = () => {
         marginBottom: '15px',
         boxSizing: 'border-box',
         border: '1px solid #ccc',
-        borderRadius: '4px',
+        borderRadius: '4px'
     };
 
     const stilZaDugme = {
@@ -46,7 +45,7 @@ const DodavanjeKartice = () => {
         fontWeight: 'bold',
         width: '200px',
         height: '50px',
-        marginLeft: '50px',
+        marginLeft: '50px'
     };
 
     const stilNaslova = {
@@ -54,7 +53,7 @@ const DodavanjeKartice = () => {
         fontWeight: 'bold',
         marginTop: '0',
         marginBottom: '20px',
-        color: '#007BFF',
+        color: '#007BFF'
     };
 
     const stilCeleStranice = {
@@ -65,16 +64,17 @@ const DodavanjeKartice = () => {
         height: '100vh',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     };
 
     const stilZaNavBar = {
         position: 'fixed',
         top: 0,
         width: '100%',
-        zIndex: 1000,
+        zIndex: 1000
     }
 
+    // Funkcija za validaciju polja i slanje kartice na server
     const dodajKarticu = () => {
         if (!brojKartice || !datumIsteka || !cvv) {
             alert('Molimo vas da popunite sva polja kartice !!');
@@ -91,8 +91,7 @@ const DodavanjeKartice = () => {
                     datumIsteka: datumIsteka,
                     cvv: cvv,
                 })
-            alert('Kartica je dodata. Sačekajte verifikaciju od admina !!');
-            redirekcija('/');
+            alert('Kartica je dodata. Sačekajte verifikaciju admina !!');
         }
     };
 
