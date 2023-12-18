@@ -169,6 +169,7 @@ const UplataKonverzija = () => {
             valuta: valuta1
         });
         alert('Uplata je uspešna !!');
+        window.location.reload();
     };
 
     // Slanje podataka na server, ako je korisnik konvertovao stanje na računu
