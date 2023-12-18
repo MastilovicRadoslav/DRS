@@ -9,7 +9,11 @@ const PotvrdaKupovine = ({ showModal, handleOpenModal, handleCloseModal, nazivPr
   const [kolicina, podesiKolicinu] = useState('');
   const [valute, postaviValute] = useState([]);
   const [valuta, postaviOdabranuValutu] = useState('');
+  const [stanje, postaviStanje] = useState('');
+  const [stanje2, postaviStanje2] = useState('');
+  const [zaradaAdmina, postaviZaradu] = useState('');
 
+  // Konverzija cene u odabranu valutu po trenutnom kursu
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,6 +31,7 @@ const PotvrdaKupovine = ({ showModal, handleOpenModal, handleCloseModal, nazivPr
     }
   }, [showModal, cenaProizvoda, valutaProizvoda, valuta]);
 
+  // Dobavljanje svih postojećih valuta za prikaz
   useEffect(() => {
     const dobaviValute = async () => {
       const odgovor = await axios.get('https://open.er-api.com/v6/latest');
@@ -37,20 +42,83 @@ const PotvrdaKupovine = ({ showModal, handleOpenModal, handleCloseModal, nazivPr
     dobaviValute();
   }, []);
 
+  // Konverzija stanja za odabranu valutu po trenutnom kursu
+  useEffect(() => {
+    const konverzijaStanja = async () => {
+      try {
+        const odgovor = await fetch(`https://open.er-api.com/v6/latest/${valuta}`);
+        const data = await odgovor.json();
+        const konvertovanoStanje = (data.rates[valuta] / data.rates[kartica.valuta]) * kartica.stanjeNaRacunu;
+        postaviStanje(konvertovanoStanje.toFixed(2));
+        const konvertovanoStanje2 = (data.rates['USD'] / data.rates[valuta]) * (kolicina * konvertovanaCena);
+        postaviZaradu(konvertovanoStanje2.toFixed(2));
+        const konvertovanoStanje3 = (data.rates[kartica.valuta] / data.rates[valuta]) * konvertovanaCena;
+        postaviStanje2(konvertovanoStanje3.toFixed(2));
+      } catch (error) {
+        console.error('Greška:', error);
+      }
+    };
+
+    if (valuta !== '') {
+      konverzijaStanja();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [valuta, kolicina]);
+
   const stilZaUnos = {
     fontFamily: 'Arial',
     textAlign: 'center',
     color: 'blue',
     width: '100px',
-    marginLeft: '10px',
+    marginLeft: '10px'
   };
 
   const stilKontejnera = {
-    marginBottom: '20px',
+    marginBottom: '20px'
   };
 
   const stilListeValuta = {
-    marginLeft: '10px',
+    marginLeft: '10px'
+  };
+
+  const poruciProizvod = () => {
+    if (kartica.valuta === valuta) {
+      if (kartica.stanjeNaRacunu >= (kolicina * konvertovanaCena)) {
+        axios.post('http://127.0.0.1:5000/Naruci', {
+          nazivProizvoda: nazivProizvoda,
+          cena: konvertovanaCena,
+          valuta: valuta,
+          kolicina: kolicina,
+          zaradaAdmina: zaradaAdmina
+        })
+        alert("Uspešno ste naručili proizvod !!");
+        window.location.reload();
+      }
+      else {
+        alert("Nemate dovoljno novca da naručite proizvod !!");
+      }
+    }
+    else {
+      if (stanje >= (kolicina * konvertovanaCena)) {
+        axios.post('http://127.0.0.1:5000/Naruci', {
+          nazivProizvoda: nazivProizvoda,
+          cena: stanje2,
+          valuta: valuta,
+          kolicina: kolicina,
+          zaradaAdmina: zaradaAdmina
+        })
+        alert("Uspešno ste naručili proizvod !!");
+        window.location.reload();
+      }
+      else {
+        alert("Nemate dovoljno novca da naručite proizvod !!");
+      }
+    }
+  }
+
+  const klikNaNaruci = () => {
+    poruciProizvod();
+    handleCloseModal();
   };
 
   return (
@@ -85,7 +153,7 @@ const PotvrdaKupovine = ({ showModal, handleOpenModal, handleCloseModal, nazivPr
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseModal}>
+        <Button variant="secondary" onClick={klikNaNaruci}>
           Potvrdi naručbinu
         </Button>
       </Modal.Footer>

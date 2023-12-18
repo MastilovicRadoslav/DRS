@@ -8,12 +8,13 @@ const Pocetna = () => {
 
     const [podaci, podesiPodatke] = useState([]);
     const [uloga, podesiUlogu] = useState([]);
+    const [kartica, podesiKartice] = useState([]);
 
     const stilKontejneraZaKartice = {
         display: 'flex',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        gap: '25px',
+        gap: '25px'
     };
 
     const stilCeleStranice = {
@@ -29,14 +30,14 @@ const Pocetna = () => {
         paddingTop: '55px',
         overflowY: 'auto',
         minHeight: '100vh',
-        flexDirection: 'column',
+        flexDirection: 'column'
     };
 
     const stilZaNavBar = {
         position: 'fixed',
         top: 0,
         width: '100%',
-        zIndex: 1000,
+        zIndex: 1000
     }
 
     const stilZaProfil = {
@@ -44,14 +45,16 @@ const Pocetna = () => {
         top: 0,
         right: 0,
         marginRight: '30px',
-        marginTop: '40px',
+        marginTop: '40px'
     };
 
+    // Prihvatanje podataka o proizvodima, prijavljenom korisniku i kartici korisnika sa servera
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const odgovor = await axios.get('http://localhost:5000/');
                 podesiPodatke(odgovor.data.proizvodi);
+                podesiKartice(odgovor.data.kartica)
                 const email = odgovor.data.email;
 
                 if (email === '') {
@@ -93,7 +96,7 @@ const Pocetna = () => {
             </div>
             <div className="kontejner" style={stilKontejneraZaKartice}>
                 {podaci.map((proizvod, index) => (
-                    <PrikazProizvoda key={index} proizvod={proizvod} />
+                    <PrikazProizvoda key={index} proizvod={proizvod} kartica={kartica} />
                 ))}
             </div>
         </div>
