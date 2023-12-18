@@ -1,7 +1,11 @@
+from notificationBy_Email import posalji_email
 from User import Korisnik
 from Product import Proizvod
 from Card import Kartica
+from Order import Kupovina
 from config import db, app
+import time
+import threading
 
 # Funkcija za dodavanje Korisnika u bazu podataka
 def dodavanjeKorisnikaUBazu(novi_korisnik):
@@ -19,7 +23,7 @@ def citanjeKorisnikaIzBaze():
         korisniciIzBaze = Korisnik.query.all()
         return korisniciIzBaze
 
-# Funkcija za nalaženje Korisnika po emailu
+# Funkcija za nalaženje Korisnika po emailu u bazi podataka
 def nadjiKorisnikaPoEmailu(email):
     with app.app_context():
         korisnik = Korisnik.query.filter_by(email=email).first()
@@ -28,6 +32,18 @@ def nadjiKorisnikaPoEmailu(email):
             return korisnik
         else:
             print(f"Korisnik sa email {email} ne postoji u bazi !")
+            return None
+
+# Autorizacija Korisnika
+def autorizacijaKorisnika(email, lozinka):
+    with app.app_context():
+        korisnik = Korisnik.query.filter_by(email=email, lozinka=lozinka).first()
+
+        if korisnik is not None:
+            return korisnik
+        else:
+            print(f"Korisnik sa email {email} i lozinkom {lozinka} ne postoji u bazi !")
+            return None
     
 # Funkcija za ažuriranje Korisnika u bazi podataka
 def azuriranjeKorisnikaUBazi(postojeci_korisnik):
@@ -62,6 +78,16 @@ def citanjeProizvodaIzBaze():
     with app.app_context():
         proizvodiIzBaze = Proizvod.query.all()
         return proizvodiIzBaze
+
+# Funkcija za nalaženje Proizvoda u bazi podataka
+def pronadjiProizvodPoNazivu(naziv):
+    with app.app_context():
+        proizvod = Proizvod.query.filter_by(naziv=naziv).first()
+
+        if proizvod is not None:
+            return proizvod
+        else:
+            return None
     
 # Funkcija za ažuriranje Proizvoda u bazi podataka
 def azuriranjeProizvodaUBazi(postojeci_proizvod):
@@ -95,7 +121,7 @@ def citanjeKarticaIzBaze():
         karticeIzBaze = Kartica.query.all()
         return karticeIzBaze
     
-# Funkcija za ažuriranje Kartica u bazi podataka
+# Funkcija za ažuriranje Kartice u bazi podataka
 def azuriranjeKarticeUBazi(postojeca_kartica):
     with app.app_context():
         kartica_iz_baze = Kartica.query.filter_by(brojKartice=postojeca_kartica.brojKartice).first()
@@ -111,7 +137,7 @@ def azuriranjeKarticeUBazi(postojeca_kartica):
         else:
             print(f"Kartica sa brojem kartice {postojeca_kartica.brojKartice} ne postoji u bazi!")
 
-# Funkcija za nalaženje Kartice sa određenim brojem u bazi podataka
+# Funkcija za nalaženje Kartice sa određenim brojem kartice u bazi podataka
 def nadjiKarticuUBaziSaBrojKartice(broj_kartice):
     with app.app_context():
         kartica = Kartica.query.filter_by(brojKartice=broj_kartice).first()
@@ -120,3 +146,57 @@ def nadjiKarticuUBaziSaBrojKartice(broj_kartice):
             return kartica
         else:
             print(f"Kartica sa brojem {kartica.brojKartice} ne postoji u bazi !")
+            return None
+
+# Funkcija za nalaženje Kartice sa određenim vlasnikom u bazi podataka
+def nadjiKarticuUBaziSaVlasnikom(vlasnik):
+    with app.app_context():
+        kartica = Kartica.query.filter_by(vlasnik=vlasnik).first()
+
+        if kartica is not None:
+            return kartica
+        else:
+            print(f"Kartica sa vlasnikom {vlasnik} ne postoji u bazi !")
+            return None
+
+# Funkcija za dodavanje Kupovine u bazu podataka
+def dodajKupovinu(nova_kupovina):
+    with app.app_context():
+        db.session.add(nova_kupovina)
+        db.session.commit()
+
+# Funkcija za čitanje Kupovina iz baze podataka
+def citanjeKupovinaIzBaze():
+    with app.app_context():
+        kupovine = Kupovina.query.all()
+        return kupovine
+
+# Funkcija za nalaženje Kupovine po kupcu u bazi podataka
+def pronadjiKupovinePoKupcu(kupac):
+    with app.app_context():
+        kupovine_kupca = Kupovina.query.filter_by(kupac=kupac).all()
+        return kupovine_kupca
+
+# Funkcija za nit koja obrađuje kupovine
+def dodajKupovineUListu(kupovine):
+    time.sleep(60)
+    telo = ""
+    with app.app_context():
+        for kupovina in kupovine:
+            db.session.add(kupovina)
+            if len(kupovine) > 0:
+                telo += f"Podaci o kupovinama:\nNaziv proizvoda: {kupovina.proizvod}\nKupac: {kupovina.kupac}\nNaručena količina: {kupovina.kolicina}\nCena jednog proizvoda: {kupovina.cenaKupovine}\nDatum kupovine: {kupovina.datumKupovine}\nUkupan iznos: {float(kupovina.cenaKupovine) * int(kupovina.kolicina)}\nValuta: {kupovina.valuta}\n"
+
+        db.session.commit()
+
+    if telo != "":
+        naslov = "Kupljen je proivod na stranici"
+        kome = "drsprojekat2023@gmail.com"
+        posalji_email(naslov, telo, kome)
+
+    kupovine.clear()
+
+# Funkcija za pokretanje niti za obradu kupovina
+def pokreni_nit(kupovine):
+    nit = threading.Thread(target=dodajKupovineUListu, args=(kupovine,))
+    nit.start()
