@@ -119,7 +119,7 @@ const UplataKonverzija = () => {
         zIndex: 1000
     }
 
-    // Prijem podataka sa servera o kartici
+    // Funkcija za prijem podataka sa servera o kartici
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -133,9 +133,7 @@ const UplataKonverzija = () => {
         fetchData();
     }, []);
 
-    console.log(podaci.vlasnik)
-
-    // Podešavanje vrednosti promenljivih za prikaz na stranici
+    // Funkcija za podešavanje vrednosti polja za prikaz o kartici
     useEffect(() => {
         if (podaci !== undefined && podaci.vlasnik !== undefined) {
             postaviEmail(podaci.vlasnik);
@@ -160,7 +158,7 @@ const UplataKonverzija = () => {
         dobaviValute();
     }, []);
 
-    // Slanje podataka na server, ako je korisnik uplatio na račun
+    // Funkcija za slanje podataka na server, ako je korisnik uplatio na račun
     const uplati = () => {
         axios.put('http://127.0.0.1:5000/Uplata', {
             email: email,
@@ -172,7 +170,7 @@ const UplataKonverzija = () => {
         window.location.reload();
     };
 
-    // Slanje podataka na server, ako je korisnik konvertovao stanje na računu
+    // Funkcija za slanje podataka na server, ako je korisnik konvertovao stanje na računu
     const konvertuj = () => {
         axios.put('http://127.0.0.1:5000/Konverzija', {
             email: email,
@@ -183,7 +181,7 @@ const UplataKonverzija = () => {
         alert('Konverzija je uspešna !!');
     };
 
-    // Konverzija stanja za odabranu valutu po trenutnom kursu
+    // Funkcija za konverziju stanja za odabranu valutu po trenutnom kursu
     useEffect(() => {
         const konverzijaStanja = async () => {
             try {
@@ -208,7 +206,7 @@ const UplataKonverzija = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [valuta2, pomocnaValuta]);
 
-    // Podečavanje vrednosti za valutu i pomoćnu valutu (prethodna vrednost)
+    // Funkcija za podešavanje vrednosti za valutu i pomoćnu valutu (prethodna vrednost)
     const podesavanjeValuta = (e) => {
         const novaVrednost = e.target.value;
         postaviPomocnuValutu(valuta2);
