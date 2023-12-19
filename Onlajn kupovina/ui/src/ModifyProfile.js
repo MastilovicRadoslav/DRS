@@ -15,6 +15,7 @@ const IzmenaProfila = () => {
     const [lozinka, podesiLozinku] = useState('');
     const [podaci, podesiPodatke] = useState([]);
 
+    // Funkcija za prijem podataka o korisniku sa servera
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -38,23 +39,23 @@ const IzmenaProfila = () => {
 
     const stilForme = {
         display: 'inline-block',
-        textAlign: 'left',
+        textAlign: 'left'
     };
 
     const stilZaLabelu = {
         fontFamily: 'Times New Roman',
         fontWeight: 'bold',
-        marginTop: 0,
+        marginTop: 0
     };
 
     const stilZaUnos = {
         fontFamily: 'Times New Roman',
-        color: 'blue',
+        color: 'blue'
     };
 
     const stilZaDugme = {
         fontFamily: 'Times New Roman',
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     };
 
     const stilNaslova = {
@@ -62,7 +63,7 @@ const IzmenaProfila = () => {
         fontWeight: 'bold',
         marginTop: 0,
         textAlign: 'center',
-        color: '#007BFF',
+        color: '#007BFF'
     };
 
     const stilCeleStranice = {
@@ -73,40 +74,41 @@ const IzmenaProfila = () => {
         height: '100vh',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     };
 
     const stilZaNavBar = {
         position: 'fixed',
         top: 0,
         width: '100%',
-        zIndex: 1000,
+        zIndex: 1000
     }
 
+    // Funkcija za validacija polja i slanje podataka o korisniku na server
     const sacuvajIzmene = () => {
         if (ime.length === 0 || /\d/.test(ime) || !/^[a-zA-Z\s]*$/.test(ime)) {
-            alert("Ime mora biti popunjeno !!")
+            alert("Ime mora biti popunjeno !!");
         }
         else if (prezime.length === 0 || /\d/.test(prezime) || !/^[a-zA-Z\s]*$/.test(prezime)) {
-            alert("Prezime mora biti popunjeno !!")
+            alert("Prezime mora biti popunjeno !!");
         }
         else if (adresa.length === 0 || !/^[a-zA-Z0-9\s]+$/.test(adresa)) {
-            alert("Adresa mora biti popunjena !!")
+            alert("Adresa mora biti popunjena !!");
         }
         else if (grad.length === 0 || /\d/.test(grad) || !/^[a-zA-Z\s]*$/.test(grad)) {
-            alert("Grad mora biti popunjen !!")
+            alert("Grad mora biti popunjen !!");
         }
         else if (drzava.length === 0 || /\d/.test(drzava) || !/^[a-zA-Z\s]*$/.test(drzava)) {
-            alert("Država mora biti popunjena !!")
+            alert("Država mora biti popunjena !!");
         }
         else if (brTel.length === 0 || /^[a-zA-Z]*$/.test(brTel)) {
-            alert("Broj telefona mora biti popunjen !!")
+            alert("Broj telefona mora biti popunjen !!");
         }
         else if (email.length === 0 || !/^[a-zA-Z0-9@.]*$/.test(email)) {
-            alert("Email mora biti popunjen !!")
+            alert("Email mora biti popunjen !!");
         }
         else if (lozinka.length === 0 || lozinka.length < 6) {
-            alert("Lozinka mora biti popunjena !!")
+            alert("Lozinka mora biti popunjena !!");
         }
         else {
             axios.put('http://127.0.0.1:5000/Profil', {
@@ -119,10 +121,11 @@ const IzmenaProfila = () => {
                 email: email,
                 lozinka: lozinka
             })
-            alert("Izmena profila je uspešna !!")
+            alert("Izmena profila je uspešna !!");
         }
     }
 
+    // Funkcija za podešavanje vrednosti polja za prikaz o korisniku
     useEffect(() => {
         podesiIme(podaci.ime || '');
         podesiPrezime(podaci.prezime || '');
