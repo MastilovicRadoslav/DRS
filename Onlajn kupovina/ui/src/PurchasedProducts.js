@@ -7,6 +7,7 @@ const IstorijatKupovina = () => {
 
     const [podaci, podesiPodatke] = useState([]);
 
+    // Funkcija za prijem podataka o kupljenim proizvodima sa servera
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -28,7 +29,7 @@ const IstorijatKupovina = () => {
 
     const stilForme = {
         display: 'inline-block',
-        textAlign: 'left',
+        textAlign: 'left'
     };
 
     const stilNaslova = {
@@ -36,7 +37,7 @@ const IstorijatKupovina = () => {
         fontWeight: 'bold',
         marginTop: 0,
         textAlign: 'center',
-        color: '#007BFF',
+        color: '#007BFF'
     };
 
     const stilTabele = {
@@ -46,7 +47,7 @@ const IstorijatKupovina = () => {
         borderRadius: '8px',
         overflow: 'hidden',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-        border: '1px solid #ddd',
+        border: '1px solid #ddd'
     };
 
     const stilZaglavlja = {
@@ -54,7 +55,7 @@ const IstorijatKupovina = () => {
         textAlign: 'center',
         padding: '12px',
         backgroundColor: 'blue',
-        color: 'white',
+        color: 'white'
     };
 
     const stilRedaUTabeli = {
@@ -69,22 +70,22 @@ const IstorijatKupovina = () => {
         textAlign: 'center',
         backgroundImage: `url('Pozadine/uzivoPracenjeKupovina.jpg')`,
         backgroundSize: 'cover',
-        height: '100vh',
+        height: '115vh',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     };
 
     const stilZaNavBar = {
         position: 'fixed',
         top: 0,
         width: '100%',
-        zIndex: 1000,
+        zIndex: 1000
     }
 
     const stilSlike = {
         width: '80px',
-        height: 'auto%',
+        height: 'auto%'
     }
 
     return (
