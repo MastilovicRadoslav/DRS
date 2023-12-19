@@ -25,23 +25,23 @@ const DodajProizvod = () => {
 
     const stilForme = {
         display: 'inline-block',
-        textAlign: 'left',
+        textAlign: 'left'
     };
 
     const stilZaLabelu = {
         fontFamily: 'Times New Roman',
         fontWeight: 'bold',
-        marginTop: 0,
+        marginTop: 0
     };
 
     const stilZaUnos = {
         fontFamily: 'Arial',
-        color: 'blue',
+        color: 'blue'
     };
 
     const stilZaDugme = {
         fontFamily: 'Times New Roman',
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     };
 
     const stilNaslova = {
@@ -49,7 +49,7 @@ const DodajProizvod = () => {
         fontWeight: 'bold',
         marginTop: 0,
         textAlign: 'center',
-        color: '#007BFF',
+        color: '#007BFF'
     };
 
     const stilCeleStranice = {
@@ -58,16 +58,17 @@ const DodajProizvod = () => {
         backgroundSize: 'cover',
         height: '100vh',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'center'
     };
 
     const stilZaNavBar = {
         position: 'fixed',
         top: 0,
         width: '100%',
-        zIndex: 1000,
+        zIndex: 1000
     }
 
+    // Funkcija za dobavljanje svih postojećih valuta
     useEffect(() => {
         const dobaviValute = async () => {
             const odgovor = await axios.get('https://open.er-api.com/v6/latest');
@@ -78,6 +79,7 @@ const DodajProizvod = () => {
         dobaviValute();
     }, []);
 
+    // Funkcija za validacija polja i slanje podataka o proizvodu na server
     const dodavanjeProizvoda = () => {
         if (naziv.length === 0) {
             alert("Naziv proizvoda mora biti popunjen !!")
@@ -119,7 +121,7 @@ const DodajProizvod = () => {
                             <Link to="/Uzivo" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Uživo praćenje kupovina</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Verifikacija naloga</Link>
+                            <Link to="/Verifikacija" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Verifikacija naloga</Link>
                         </li>
                     </ul>
                 </div>
