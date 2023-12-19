@@ -7,7 +7,7 @@ const PrikazZaIzmenuKolicine = ({ proizvod }) => {
     const [kolicina, setKolicina] = useState(proizvod.kolicina);
 
     const stilKartice = {
-        width: '18rem',
+        width: '18rem'
     };
 
     const stilSlike = {
@@ -24,22 +24,25 @@ const PrikazZaIzmenuKolicine = ({ proizvod }) => {
     const stilZaDugme = {
         ...IzgledDugma,
         textAlign: 'center',
-        marginLeft: '20px',
+        marginLeft: '20px'
     };
 
+    // Funkcija za povećanje količine
     const povecajKolicinu = () => {
         setKolicina(kolicina + 1);
     }
 
+    // Funkcija koja smanjuje količinu
     const smanjiKolicinu = () => {
         if (kolicina > 0) {
             setKolicina(kolicina - 1);
         }
         if (kolicina <= 0) {
-            alert("Nemate pravo da smanjite količinu !!")
+            alert("Nemate pravo da smanjite količinu !!");
         }
     }
 
+    // Funkcija za slanje podataka na server o proizvodima sa izmenjenom količinom
     const posaljiIzmenu = () => {
         axios.put('http://127.0.0.1:5000/IzmenaKolicine', {
             naziv: proizvod.naziv,
@@ -48,7 +51,7 @@ const PrikazZaIzmenuKolicine = ({ proizvod }) => {
             kolicina: kolicina,
             slika: proizvod.slika
         })
-        alert("Izmena količine je uspešna !!")
+        alert("Izmena količine je uspešna !!");
     }
 
     return (
