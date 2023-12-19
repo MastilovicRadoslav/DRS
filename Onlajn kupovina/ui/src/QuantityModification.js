@@ -12,7 +12,7 @@ const IzmenaKolicine = () => {
         display: 'flex',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        gap: '25px',
+        gap: '25px'
     };
 
     const stilCeleStranice = {
@@ -28,16 +28,17 @@ const IzmenaKolicine = () => {
         paddingTop: '55px',
         overflowY: 'auto',
         minHeight: '100vh',
-        flexDirection: 'column',
+        flexDirection: 'column'
     };
 
     const stilZaNavBar = {
         position: 'fixed',
         top: 0,
         width: '100%',
-        zIndex: 1000,
+        zIndex: 1000
     }
 
+    // Funkcija za prijem podataka o proizvodima sa servera
     useEffect(() => {
         const fetchData = async () => {
             try {
