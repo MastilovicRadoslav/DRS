@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const DodavanjeKartice = () => {
-    
+
     const [brojKartice, postaviBrojKartice] = useState('');
     const [datumIsteka, postaviDatumIsteka] = useState('');
     const [cvv, postaviCVV] = useState('');
@@ -74,7 +74,7 @@ const DodavanjeKartice = () => {
         zIndex: 1000
     }
 
-    // Funkcija za validaciju polja i slanje kartice na server
+    // Funkcija za validaciju polja i slanje podataka o kartici na server
     const dodajKarticu = () => {
         if (!brojKartice || !datumIsteka || !cvv) {
             alert('Molimo vas da popunite sva polja kartice !!');
@@ -133,7 +133,6 @@ const DodavanjeKartice = () => {
                         value={brojKartice}
                         onChange={(e) => postaviBrojKartice(e.target.value)}
                     />
-
                     <label style={stilZaLabelu} htmlFor="datumIsteka">
                         Datum isteka:
                     </label>
@@ -145,7 +144,6 @@ const DodavanjeKartice = () => {
                         value={datumIsteka}
                         onChange={(e) => postaviDatumIsteka(e.target.value)}
                     />
-
                     <label style={stilZaLabelu} htmlFor="cvv">
                         CVV:
                     </label>
@@ -157,7 +155,6 @@ const DodavanjeKartice = () => {
                         value={cvv}
                         onChange={(e) => postaviCVV(e.target.value)}
                     />
-
                     <input
                         className="btn btn-outline-primary"
                         id="prijavaDugme"
