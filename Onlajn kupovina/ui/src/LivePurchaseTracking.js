@@ -7,6 +7,7 @@ const UzivoPracenjeKupovina = () => {
 
     const [podaci, podesiPodatke] = useState([]);
 
+    // Funkcija za prijem podataka o kupovinama sa servera
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -28,7 +29,7 @@ const UzivoPracenjeKupovina = () => {
 
     const stilForme = {
         display: 'inline-block',
-        textAlign: 'left',
+        textAlign: 'left'
     };
 
     const stilNaslova = {
@@ -36,7 +37,7 @@ const UzivoPracenjeKupovina = () => {
         fontWeight: 'bold',
         marginTop: 0,
         textAlign: 'center',
-        color: '#007BFF',
+        color: '#007BFF'
     };
 
     const stilTabele = {
@@ -46,7 +47,7 @@ const UzivoPracenjeKupovina = () => {
         borderRadius: '8px',
         overflow: 'hidden',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-        border: '1px solid #ddd',
+        border: '1px solid #ddd'
     };
 
     const stilZaglavlja = {
@@ -54,7 +55,7 @@ const UzivoPracenjeKupovina = () => {
         textAlign: 'center',
         padding: '12px',
         backgroundColor: 'blue',
-        color: 'white',
+        color: 'white'
     };
 
     const stilRedaUTabeli = {
@@ -62,7 +63,7 @@ const UzivoPracenjeKupovina = () => {
         textAlign: 'center',
         padding: '12px',
         backgroundColor: '#bfc1c2',
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     };
 
     const stilCeleStranice = {
@@ -72,19 +73,19 @@ const UzivoPracenjeKupovina = () => {
         height: '100vh',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     };
 
     const stilZaNavBar = {
         position: 'fixed',
         top: 0,
         width: '100%',
-        zIndex: 1000,
+        zIndex: 1000
     }
-    
+
     const stilSlike = {
         width: '80px',
-        height: 'auto%',
+        height: 'auto%'
     }
 
     return (
@@ -104,7 +105,7 @@ const UzivoPracenjeKupovina = () => {
                         <Link to="/Uzivo" className="nav-link active" style={{ color: 'yellow', fontWeight: "bold" }}>Uživo praćenje kupovina</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Verifikacija naloga</Link>
+                        <Link to="/Verifikacija" className="nav-link" style={{ color: 'yellow', fontWeight: "bold" }}>Verifikacija naloga</Link>
                     </li>
                 </ul>
             </div>
