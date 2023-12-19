@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 
-const PotvrdaKupovine = ({ showModal, handleOpenModal, handleCloseModal, nazivProizvoda, cenaProizvoda, valutaProizvoda }) => {
+const PotvrdaKupovine = ({ showModal, handleOpenModal, handleCloseModal, nazivProizvoda, cenaProizvoda, valutaProizvoda, kartica }) => {
 
   const [konvertovanaCena, podesiKonvertovanuCenu] = useState(null);
   const [kolicina, podesiKolicinu] = useState('');
@@ -13,7 +13,7 @@ const PotvrdaKupovine = ({ showModal, handleOpenModal, handleCloseModal, nazivPr
   const [stanje2, postaviStanje2] = useState('');
   const [zaradaAdmina, postaviZaradu] = useState('');
 
-  // Konverzija cene u odabranu valutu po trenutnom kursu
+  // Funkcija za konverziju cene u odabranu valutu po trenutnom kursu
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,7 +31,7 @@ const PotvrdaKupovine = ({ showModal, handleOpenModal, handleCloseModal, nazivPr
     }
   }, [showModal, cenaProizvoda, valutaProizvoda, valuta]);
 
-  // Dobavljanje svih postojećih valuta za prikaz
+  // Funkcija za dobavljanje svih postojećih valuta
   useEffect(() => {
     const dobaviValute = async () => {
       const odgovor = await axios.get('https://open.er-api.com/v6/latest');
@@ -42,7 +42,7 @@ const PotvrdaKupovine = ({ showModal, handleOpenModal, handleCloseModal, nazivPr
     dobaviValute();
   }, []);
 
-  // Konverzija stanja za odabranu valutu po trenutnom kursu
+  // Funkcija za konverziju stanja za odabranu valutu po trenutnom kursu
   useEffect(() => {
     const konverzijaStanja = async () => {
       try {
@@ -81,6 +81,7 @@ const PotvrdaKupovine = ({ showModal, handleOpenModal, handleCloseModal, nazivPr
     marginLeft: '10px'
   };
 
+  // Funkcija za slanje podataka o kupovini na server
   const poruciProizvod = () => {
     if (kartica.valuta === valuta) {
       if (kartica.stanjeNaRacunu >= (kolicina * konvertovanaCena)) {
@@ -116,6 +117,7 @@ const PotvrdaKupovine = ({ showModal, handleOpenModal, handleCloseModal, nazivPr
     }
   }
 
+  // Funkcija za klik na naruči dugme
   const klikNaNaruci = () => {
     poruciProizvod();
     handleCloseModal();
