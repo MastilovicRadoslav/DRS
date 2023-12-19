@@ -29,7 +29,7 @@ function App() {
           <Route path="/Pregled" element={<PrikazRacuna />} ></Route>
           <Route path="/IzmenaKolicine" element={<IzmenaKolicine />} ></Route>
           <Route path="/UplataKonverzija" element={<UplataKonverzija />} ></Route>
-          <Route path="/Verifikacija" elemnt={<Verifikacija />}></Route>
+          <Route path="/Verifikacija" element={<Verifikacija />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
