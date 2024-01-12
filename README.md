@@ -26,3 +26,42 @@ Admin ima sledeće opcije - dodavanje proizvoda, povećanje količine proizvoda,
 * **Baza podataka** -> _Microsoft SQL Server 2022_ relaciona baza podataka, za prikaz podataka -> _Microsoft SQL Server Management Studio 19_
 
 ### **Izgled stranica :**
+
+**Početna:**
+![Pocetna](https://github.com/MastilovicRadoslav/DRS/assets/122049689/24378437-3680-4b29-849e-03cd9c5b14c3)
+
+**Prijava:**
+![Prijavljivanje](https://github.com/MastilovicRadoslav/DRS/assets/122049689/2577fcef-8727-47fe-9c3d-b936765358ea)
+
+**Registracija:**
+![Registracija](https://github.com/MastilovicRadoslav/DRS/assets/122049689/cb574817-d99d-49e2-bfca-a69ac9780d02)
+
+**Profil:**
+![Profil](https://github.com/MastilovicRadoslav/DRS/assets/122049689/c9b41a0d-cdc3-42f7-805b-f436084ba918)
+
+**Dodavanje kartice:**
+![Dodavanje kartice](https://github.com/MastilovicRadoslav/DRS/assets/122049689/12e81a9f-f08c-4527-b938-3e55ae4712a4)
+
+**Pregled računa:**
+![Pregled racuna](https://github.com/MastilovicRadoslav/DRS/assets/122049689/42f27b26-9f23-4858-a7a3-137a3de7bb99)
+
+**Uplata i konverzija:**
+![Uplata i konverzija valuta](https://github.com/MastilovicRadoslav/DRS/assets/122049689/d655ed93-5383-45e2-9c0e-a838f04c1497)
+
+**Istorijat:**
+![Kupljeni prozivodi](https://github.com/MastilovicRadoslav/DRS/assets/122049689/38ce780b-a1cb-464a-9e0f-1f820df768cd)
+
+**Naručivanje:**
+![Kupovina prozivoda](https://github.com/MastilovicRadoslav/DRS/assets/122049689/d8d55e0f-19b9-4fec-a2ed-5207dfa152f9)
+
+**Dodavanje proizvoda:**
+![Dodavanje prozvoda](https://github.com/MastilovicRadoslav/DRS/assets/122049689/dfe07bbe-dafd-4cca-9fe8-4546f10ecd14)
+
+**Izmena količine proizvoda:**
+![Povecanje Kolicine prozivoda](https://github.com/MastilovicRadoslav/DRS/assets/122049689/2c0039e4-9df7-4f94-888c-c1279147ec63)
+
+**Uživo praćenje kupovina:**
+![Uzivo pracenje prozivoda](https://github.com/MastilovicRadoslav/DRS/assets/122049689/cd54e85c-cb12-4bb1-ade2-c01d9e939cfc)
+
+**Verifikacija naloga:**
+![Verifikacija kartice](https://github.com/MastilovicRadoslav/DRS/assets/122049689/9ca8ae85-3e77-4304-a49d-8feb162863b3)
