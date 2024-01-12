@@ -50,7 +50,8 @@ const KarticeZaVerifikaciju = ({ kartica }) => {
             brojKartice: kartica.brojKartice,
             odobrena: 'Da'
         })
-        alert("Odobrili ste karticu !!")
+        alert("Odobrili ste karticu !!");
+        window.location.reload();
     }
 
     return (
