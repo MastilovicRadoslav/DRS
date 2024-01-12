@@ -149,7 +149,7 @@ const DodavanjeKartice = () => {
                     </label>
                     <input
                         style={stilZaUnos}
-                        type="text"
+                        type="password"
                         id="cvv"
                         maxLength={3}
                         value={cvv}
