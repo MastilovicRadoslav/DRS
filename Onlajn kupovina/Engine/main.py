@@ -277,21 +277,20 @@ def izmenjenaKolicina():
     return jsonify(response_data), 200
 
 # Prijem podataka sa stranice Verifikacija
-@app.route('/Verifikacija', methods=['GET'])
-def verifikacijaKartica():
+@app.route('/Verifikacija', methods=['PUT'])
+def verifikovaneKartice():
 
-    kartice = citanjeKarticaIzBaze()
-    serialozovane_kartice = [serializacija_kartice(
-        kartica) for kartica in kartice]
-    kartice_za_slanje = []
+    email = request.json['email']
+    brojKartice = request.json['brojKartice']
+    odobrena = request.json['odobrena']
 
-    # Slanje podataka o karticama 
-    for k in serialozovane_kartice:
-        if k['vlasnik'] != "drsprojekat2023@gmail.com" and k['odobrena'] != 'Da':
-            kartice_za_slanje.append(k)
+    # Da se nađe u bazi kartica sa vlasnikom koji ima email isti i da se ažurira polje odobrena
+    kartica = nadjiKarticuUBaziSaBrojKartice(brojKartice)
+    kartica.odobrena = odobrena
+    azuriranjeKarticeUBazi(kartica)
 
     data = {
-        'kartice': kartice_za_slanje
+        'massage': 'Podaci uspešno primljeni'
     }
 
     return jsonify(data), 200
@@ -358,7 +357,7 @@ def narucivanjeProizvoda():
     kolicina = request.json['kolicina']
     zaradaAdmina = request.json['zaradaAdmina']
 
-    kupovina = Kupovina(str(datetime.now()), nazivProizvoda,
+    kupovina = Kupovina(str(datetime.now().strftime("%d %m %Y %H:%M")), nazivProizvoda,
                         prijavljen.email, kolicina, cena, valuta)
     kupovine.append(kupovina)
 
@@ -400,6 +399,7 @@ def uzivoPracenje():
 
     data = [
         {
+            'slika': proizvod.slika,
             'nazivProizvoda': proizvod.naziv,
             'cena': proizvod.cena,
             'valuta': proizvod.valuta,
