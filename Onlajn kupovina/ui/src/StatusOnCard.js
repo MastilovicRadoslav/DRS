@@ -86,7 +86,7 @@ const PrikazRacuna = () => {
     useEffect(() => {
         postaviBrojKartice(podaci.brojKartice || '');
         postaviDatumIsteka(podaci.datumIsteka || '');
-        postaviStanje(podaci.stanje || '');
+        postaviStanje(podaci.stanje);
         postaviValutu(podaci.valuta || '');
     }, [podaci]);
 
